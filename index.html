@@ -27,63 +27,71 @@
         overflow-x: hidden;
     }
 
-    /* HEADER AJUSTADO CON SUBTÍTULO */
+    /* HEADER: LOGO + TITULO + SUBTITULO */
     header {
         background: rgba(15, 23, 42, 0.95);
         backdrop-filter: blur(10px);
-        padding: 20px;
+        padding: 25px;
         text-align: center;
         border-bottom: 2px solid var(--neon-purple);
         box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 25px;
+        gap: 30px;
         min-height: 120px;
     }
 
     .header-logo {
-        max-height: 90px;
+        max-height: 100px;
         width: auto;
-        object-fit: contain;
+        display: block;
         filter: drop-shadow(0 0 10px var(--neon-purple));
     }
 
-    .brand-container {
+    .brand-text {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        text-align: left;
     }
 
     .header-title {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         font-weight: 700;
         letter-spacing: 2px;
-        background: linear-gradient(to right, #fff, var(--neon-cyan));
+        background: linear-gradient(to right, #ffffff, var(--neon-cyan));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-transform: uppercase;
         margin: 0;
         line-height: 1;
+        text-transform: uppercase;
     }
 
     .header-subtitle {
         font-family: 'Rajdhani', sans-serif;
-        font-size: 1rem;
-        font-weight: 500;
-        letter-spacing: 4px;
+        font-size: 1.1rem;
         color: var(--neon-cyan);
+        letter-spacing: 3px;
         text-transform: uppercase;
         margin-top: 5px;
-        opacity: 0.9;
+        font-weight: 600;
     }
 
-    /* TARJETAS Y ANIMACIONES */
+    /* TARJETAS CON ANIMACIÓN RESTAURADA */
+    .container { 
+        padding: 40px; 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 30px; 
+        margin-right: 320px; 
+    }
+
     .card { 
         background: rgba(30, 41, 59, 0.6); 
         border-radius: 20px; 
-        padding: 20px; 
+        padding: 25px; 
         text-align: center; 
         border: 1px solid rgba(255,255,255,0.1); 
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -92,7 +100,7 @@
     }
 
     .card:hover {
-        transform: translateY(-12px) scale(1.04);
+        transform: translateY(-15px) scale(1.05);
         border-color: var(--neon-cyan);
         box-shadow: 0 0 35px rgba(6, 182, 212, 0.4);
         background: rgba(30, 41, 59, 0.9);
@@ -102,157 +110,122 @@
         width: 100%; 
         height: 180px; 
         object-fit: contain; 
-        margin-bottom: 15px; 
-        transition: 0.4s;
+        margin-bottom: 20px; 
+        transition: transform 0.4s;
     }
 
-    .card:hover img { transform: scale(1.1); }
-
-    /* Modal Estilo */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 3000;
-        left: 0; top: 0;
-        width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.94);
-        backdrop-filter: blur(12px);
+    .card:hover img {
+        transform: scale(1.15);
     }
 
-    .modal-content {
-        background: #0f172a;
-        margin: 5% auto;
-        padding: 30px;
-        border: 2px solid var(--neon-cyan);
-        width: 85%;
-        max-width: 500px;
-        border-radius: 24px;
-        position: relative;
-        text-align: center;
-        box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
-    }
+    /* PRECIO Y BOTONES */
+    .price { font-size: 26px; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; font-family: 'Orbitron'; }
+    .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 12px; border-radius: 10px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
+    .btn-add:hover { filter: brightness(1.2); }
 
-    .close-modal { position: absolute; right: 20px; top: 10px; color: white; font-size: 30px; cursor: pointer; }
-    .specs-list { text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; margin: 20px 0; border-left: 4px solid var(--neon-cyan); }
-    .specs-list li { margin-bottom: 12px; color: #cbd5e1; font-size: 1rem; list-style: none; }
-
-    /* UI General */
-    #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; box-shadow: 0 0 10px var(--neon-purple); display: flex; align-items: center; justify-content: center; }
-    .container { padding: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-right: 320px; }
-    .price { font-size: 26px; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; font-family: 'Orbitron'; text-shadow: 0 0 10px rgba(34, 197, 94, 0.3); }
-    .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 14px; border-radius: 12px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
-    
-    /* Carrito lateral */
+    /* CARRITO LATERAL */
     #cart {
         position: fixed;
-        top: 20px;
-        right: 20px;
+        top: 20px; right: 20px;
         background: rgba(15, 23, 42, 0.98);
-        padding: 20px;
-        border-radius: 20px;
-        width: 260px;
-        border: 1px solid var(--neon-purple);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        max-height: 85vh;
-        overflow-y: auto;
+        padding: 20px; border-radius: 20px;
+        width: 280px; border: 1px solid var(--neon-purple);
+        z-index: 1000; max-height: 80vh; overflow-y: auto;
     }
 
-    #cart h3 { font-family: 'Orbitron'; color: var(--neon-purple); text-align: center; margin-top: 0; letter-spacing: 2px; }
-    .cart-item { font-size: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
-    .remove-btn { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 16px; }
-    #total { font-family: 'Orbitron'; text-align: center; color: var(--neon-cyan); margin: 20px 0; font-size: 1.2rem; }
-    .checkout { background: var(--neon-green); border: none; padding: 15px; width: 100%; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; }
+    /* MODAL */
+    .modal {
+        display: none; position: fixed; z-index: 3000;
+        left: 0; top: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+    }
+    .modal-content {
+        background: #0f172a; margin: 5% auto; padding: 30px;
+        border: 2px solid var(--neon-cyan); width: 90%; max-width: 500px;
+        border-radius: 25px; text-align: center;
+    }
 
-    footer { background: rgba(15, 23, 42, 0.9); padding: 50px 20px; text-align: center; border-top: 2px solid var(--neon-purple); margin-top: 60px; font-family: 'Orbitron'; }
-    .social-btn { text-decoration: none; color: white; padding: 12px 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 12px; transition: 0.3s; }
-    .social-btn:hover { background: white; color: black; transform: scale(1.05); }
-
-    @media (max-width: 900px) { 
-        header { flex-direction: column; gap: 15px; }
-        .brand-container { align-items: center; }
-        .header-title { font-size: 1.8rem; }
-        .container { margin-right: 0; margin-bottom: 400px; } 
-        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 24px 24px 0 0; } 
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+        header { flex-direction: column; text-align: center; }
+        .brand-text { align-items: center; text-align: center; }
+        .container { margin-right: 0; margin-bottom: 350px; }
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 25px 25px 0 0; }
     }
 </style>
 </head>
 <body onclick="startMusic()">
 
 <audio id="bgMusic" loop><source src="04 Judgment -X- (Stage 1-1).mp3" type="audio/mpeg"></audio>
-<audio id="soundHover" src="https://cdn.pixabay.com/audio/2022/03/15/audio_731422312b.mp3"></audio>
+<audio id="soundHover" src="https://cdn.freesound.org/previews/536/536421_11893351-lq.mp3"></audio>
 <audio id="soundAdd" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
 <audio id="soundCustom" src="notification_message-notification-22-270130.mp3"></audio>
 
 <div id="productModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin-bottom:20px;">
-        <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan); margin-bottom:10px;"></h2>
-        <div class="specs-list"><ul id="modalSpecs" style="padding: 0;"></ul></div>
+        <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan);"></h2>
+        <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0;">
+        <div id="modalSpecs" style="text-align:left; background:rgba(255,255,255,0.05); padding:15px; border-radius:15px; margin-bottom:20px;"></div>
         <div id="modalPrice" class="price"></div>
-        <button id="modalAddBtn" class="btn-add">AÑADIR AL CARRITO</button>
+        <button class="btn-add" id="modalAddBtn">AÑADIR AL CARRITO</button>
+        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px;">CERRAR</button>
     </div>
 </div>
 
-<button id="sound-control" onclick="toggleAllSound(event)">
-    <i id="sound-icon" class="fas fa-volume-up"></i>
-</button>
-
 <header>
-    <img src="logo.jpg" alt="Logo" class="header-logo">
-    <div class="brand-container">
+    <img src="logo.jpg" alt="RETROID_GAMES" class="header-logo">
+    <div class="brand-text">
         <h1 class="header-title">RETROID GAMES</h1>
         <span class="header-subtitle">Retro Consoles Gaming For You</span>
     </div>
 </header>
 
 <div id="cart">
-    <h3>CARRITO</h3>
+    <h3 style="font-family:'Orbitron'; color:var(--neon-purple); text-align:center;">CARRITO</h3>
     <div id="cart-items"></div>
-    <div id="total">Total: Bs. 0</div>
-    <button class="checkout" onclick="checkout()">
+    <div id="total" style="font-family:'Orbitron'; text-align:center; margin:15px 0; color:var(--neon-cyan);">Total: Bs. 0</div>
+    <button class="btn-add" style="background:var(--neon-green)" onclick="checkout()">
         <i class="fab fa-whatsapp"></i> ENVIAR PEDIDO
     </button>
 </div>
 
 <div class="container">
-    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['CPU: Snapdragon 865', 'RAM: 8GB LPDDR4x', 'Memoria: 128GB UFS 3.1', 'Pantalla: 5.5p AMOLED 1080p', 'Batería: 5,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onmouseover="playHover()" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', 'CPU: Snapdragon 865 | RAM: 8GB LPDDR4x | Pantalla: 5.5p AMOLED')">
         <img src="retroid pocket 5.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['CPU: Snapdragon 8 Gen 2', 'RAM: 12GB LPDDR5X', 'Memoria: 512GB UFS 4.0', 'Pantalla: 7p OLED 120Hz', 'Batería: 8,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onmouseover="playHover()" onclick="openSpecs('AYN Odin 2 Portal', 6000, 'odin2portal.jpg', 'CPU: SD 8 Gen 2 | RAM: 12GB LPDDR5X | Pantalla: 7p OLED')">
         <img src="odin2portal.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal Pro</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal</h2>
         <div class="price">Bs. 6000</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Anbernic RG477V', 3300, 'anbernic rg477v.jpg', ['CPU: Dimensity 8300 (4nm)', 'RAM: 8GB LPDDR5X', 'Memoria: 128GB', 'Pantalla: 4.7p LTPS 120Hz', 'Batería: 5,500 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onmouseover="playHover()" onclick="openSpecs('Anbernic RG477V', 3300, 'anbernic rg477v.jpg', 'CPU: Dimensity 8300 | RAM: 8GB LPDDR5X | Pantalla: 4.7p 120Hz')">
         <img src="anbernic rg477v.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['CPU: Snapdragon 8 Gen 2', 'RAM: 12GB LPDDR5X', 'Memoria: 256GB UFS 4.0', 'Pantalla: 6p AMOLED 120Hz', 'Batería: 6,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onmouseover="playHover()" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', 'CPU: SD 8 Gen 2 | RAM: 12GB | Pantalla Dual AMOLED')">
         <img src="ayn thor.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Retroid Pocket 6', 4000, 'retroid pocket 6.jpg', ['CPU: Snapdragon 8 Gen 2', 'RAM: 8GB LPDDR5x', 'Memoria: 128GB', 'Pantalla: 5.5p AMOLED 120Hz'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onmouseover="playHover()" onclick="openSpecs('Retroid Pocket 6', 4000, 'retroid pocket 6.jpg', 'CPU: SD 8 Gen 2 | RAM: 8GB LPDDR5x | Almacenamiento: 128GB')">
         <img src="retroid pocket 6.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['CPU: Snapdragon 8 Elite', 'RAM: 12GB LPDDR5X', 'Memoria: 256GB', 'Pantalla: 6p AMOLED 120Hz'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onmouseover="playHover()" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', 'CPU: Snapdragon 8 Elite | RAM: 12GB | Pantalla 120Hz')">
         <img src="odin 3.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
@@ -260,68 +233,39 @@
     </div>
 </div>
 
-<footer>
-    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--neon-cyan);">📍 EL ALTO - BOLIVIA</div>
-    <div class="social-links">
-        <a href="https://www.tiktok.com/@retroid_games" target="_blank" class="social-btn" onmouseover="playEffect('soundHover')">
-            <i class="fab fa-tiktok"></i> TikTok @retroid_games
-        </a>
-    </div>
-</footer>
-
 <script>
 let cart = [];
-let soundEnabled = true;
 let musicStarted = false;
 
 function startMusic() {
     if (!musicStarted) {
-        const music = document.getElementById('bgMusic');
-        music.volume = 0.4;
-        music.play().catch(() => {});
+        document.getElementById('bgMusic').volume = 0.3;
+        document.getElementById('bgMusic').play();
         musicStarted = true;
     }
 }
 
+function playHover() {
+    const s = document.getElementById('soundHover');
+    s.currentTime = 0;
+    s.volume = 0.2;
+    s.play().catch(()=>{});
+}
+
 function openSpecs(name, price, img, specs) {
-    document.getElementById('modalImg').src = img;
     document.getElementById('modalTitle').innerText = name;
+    document.getElementById('modalImg').src = img;
     document.getElementById('modalPrice').innerText = 'Bs. ' + price;
-    let specsHtml = '';
-    specs.forEach(s => specsHtml += `<li>⚡ <b>${s.split(':')[0]}:</b> ${s.split(':')[1]}</li>`);
-    document.getElementById('modalSpecs').innerHTML = specsHtml;
+    document.getElementById('modalSpecs').innerText = specs;
     document.getElementById('modalAddBtn').onclick = () => { addToCart(name, price); closeModal(); };
     document.getElementById('productModal').style.display = "block";
-    playEffect('soundHover');
 }
 
 function closeModal() { document.getElementById('productModal').style.display = "none"; }
 
-function toggleAllSound(e) {
-    e.stopPropagation();
-    soundEnabled = !soundEnabled;
-    const music = document.getElementById('bgMusic');
-    if(soundEnabled) music.play(); else music.pause();
-    document.getElementById('sound-icon').className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-}
-
-function playEffect(id) {
-    if(soundEnabled) {
-        const s = document.getElementById(id);
-        s.currentTime = 0;
-        s.volume = 0.3;
-        s.play().catch(() => {});
-    }
-}
-
 function addToCart(name, price) {
     cart.push({name, price});
-    playEffect('soundAdd');
-    renderCart();
-}
-
-function removeFromCart(index) {
-    cart.splice(index, 1);
+    document.getElementById('soundAdd').play();
     renderCart();
 }
 
@@ -331,21 +275,20 @@ function renderCart() {
     let total = 0;
     cart.forEach((item, index) => {
         total += item.price;
-        list.innerHTML += `<div class="cart-item">
-            <div style="flex:1;"><b>${item.name}</b><br><span style="color:var(--neon-green)">Bs.${item.price}</span></div>
-            <button class="remove-btn" onclick="removeFromCart(${index})"><i class="fas fa-trash-alt"></i></button>
+        list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.9rem;">
+            <span>${item.name}</span>
+            <span style="color:var(--neon-green)">Bs.${item.price}</span>
         </div>`;
     });
     document.getElementById('total').innerText = 'Total: Bs. ' + total;
 }
 
 function checkout() {
-    if(cart.length === 0) return alert('El carrito está vacío');
-    playEffect('soundCustom');
+    if(cart.length === 0) return alert('Vacío');
+    document.getElementById('soundCustom').play();
     setTimeout(() => {
-        let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A%0A";
-        cart.forEach(i => text += "• " + i.name + " (Bs. " + i.price + ")%0A");
-        text += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*";
+        let text = "¡Hola RETROID_GAMES! Pedido:%0A";
+        cart.forEach(i => text += "• " + i.name + "%0A");
         window.open("https://wa.me/59162347612?text=" + text, "_blank");
     }, 800);
 }
