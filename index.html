@@ -27,73 +27,28 @@
         overflow-x: hidden;
     }
 
-    /* HEADER CON LOGO Y TÍTULO AL LADO */
+    /* HEADER CON LOGO.PNG */
     header {
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);
-        padding: 15px 20px;
+        padding: 20px;
         text-align: center;
         border-bottom: 2px solid var(--neon-purple);
-        box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 20px; /* Espacio entre logo y texto */
-        min-height: 100px;
+        min-height: 110px;
     }
 
     .header-logo {
-        max-height: 80px;
+        max-height: 90px;
         width: auto;
         object-fit: contain;
-        filter: drop-shadow(0 0 10px var(--neon-purple));
+        filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.6));
     }
 
-    .header-title {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 2.2rem;
-        font-weight: 700;
-        letter-spacing: 3px;
-        background: linear-gradient(to right, #fff, var(--neon-cyan));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-transform: uppercase;
-        filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.8));
-        margin: 0;
-    }
-
-    /* ANIMACIONES DE PRODUCTOS ACTIVAS */
-    .card { 
-        background: rgba(30, 41, 59, 0.6); 
-        border-radius: 20px; 
-        padding: 20px; 
-        text-align: center; 
-        border: 1px solid rgba(255,255,255,0.1); 
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        cursor: pointer;
-        position: relative;
-    }
-
-    .card:hover {
-        transform: translateY(-10px) scale(1.03);
-        border-color: var(--neon-cyan);
-        box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
-        background: rgba(30, 41, 59, 0.9);
-    }
-
-    .card img { 
-        width: 100%; 
-        height: 180px; 
-        object-fit: contain; 
-        margin-bottom: 15px; 
-        transition: 0.3s;
-    }
-
-    .card:hover img {
-        transform: scale(1.1);
-    }
-
-    /* Modal */
+    /* Modal de Características */
     .modal {
         display: none;
         position: fixed;
@@ -114,18 +69,22 @@
         border-radius: 20px;
         position: relative;
         text-align: center;
+        box-shadow: 0 0 35px var(--neon-cyan);
     }
 
     .close-modal { position: absolute; right: 20px; top: 10px; color: white; font-size: 30px; cursor: pointer; }
     .modal-img { width: 100%; max-height: 200px; object-fit: contain; margin-bottom: 20px; }
     .specs-list { text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; margin: 20px 0; border-left: 4px solid var(--neon-cyan); }
-    .specs-list li { margin-bottom: 12px; color: #e2e8f0; font-size: 1rem; }
+    .specs-list li { margin-bottom: 12px; color: #e2e8f0; font-size: 1rem; line-height: 1.4; }
+    .specs-list b { color: var(--neon-cyan); }
 
     /* Estilos Generales */
     #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px var(--neon-purple); }
     .container { padding: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-right: 320px; }
+    .card { background: rgba(30, 41, 59, 0.6); border-radius: 20px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; }
+    .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 15px; }
     .price { font-size: 24px; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; font-family: 'Orbitron'; }
-    .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 12px; border-radius: 10px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
+    .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 12px; border-radius: 10px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; }
     
     /* Carrito */
     #cart {
@@ -144,20 +103,36 @@
     }
 
     #cart h3 { font-family: 'Orbitron'; color: var(--neon-purple); text-align: center; margin-top: 0; }
-    .cart-item { font-size: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
-    .remove-btn { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 16px; transition: 0.2s; }
+    
+    .cart-item {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        padding-bottom: 8px;
+    }
+
+    .remove-btn {
+        background: none;
+        border: none;
+        color: var(--neon-red);
+        cursor: pointer;
+        font-size: 16px;
+        padding: 0 5px;
+        transition: 0.2s;
+    }
+
+    .remove-btn:hover { transform: scale(1.2); color: #ff6b6b; }
+
     #total { font-family: 'Orbitron'; text-align: center; color: var(--neon-cyan); margin: 15px 0; }
     .checkout { background: var(--neon-green); border: none; padding: 15px; width: 100%; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
     footer { background: rgba(15, 23, 42, 0.9); padding: 40px 20px; text-align: center; border-top: 2px solid var(--neon-purple); margin-top: 50px; font-family: 'Orbitron'; }
     .social-btn { text-decoration: none; color: white; padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px; }
 
-    @media (max-width: 900px) { 
-        header { flex-direction: column; gap: 10px; }
-        .header-title { font-size: 1.5rem; }
-        .container { margin-right: 0; margin-bottom: 380px; } 
-        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; } 
-    }
+    @media (max-width: 900px) { .container { margin-right: 0; margin-bottom: 380px; } #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; } }
 </style>
 </head>
 <body onclick="startMusic()">
@@ -183,8 +158,7 @@
 </button>
 
 <header>
-    <img src="logo.jpg" alt="Logo" class="header-logo">
-    <h1 class="header-title">RETROID GAMES</h1>
+    <img src="logo.png" alt="RETROID_GAMES BOLIVIA" class="header-logo">
 </header>
 
 <div id="cart">
@@ -197,42 +171,42 @@
 </div>
 
 <div class="container">
-    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['<b>CPU:</b> Snapdragon 865', '<b>RAM:</b> 8GB LPDDR4x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 1080p', '<b>Batería:</b> 5,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['<b>CPU:</b> Snapdragon 865', '<b>RAM:</b> 8GB LPDDR4x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 1080p 60Hz', '<b>Batería:</b> 5,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 5.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 512GB UFS 4.0', '<b>Pantalla:</b> 7p OLED 120Hz', '<b>Batería:</b> 8,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 512GB UFS 4.0', '<b>Pantalla:</b> 7p OLED 1080p 120Hz', '<b>Batería:</b> 8,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="odin2portal.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Anbernic RG477V', 3300, 'anbernic rg477v.jpg', ['<b>CPU:</b> Dimensity 8300 (4nm)', '<b>RAM:</b> 8GB LPDDR5X', '<b>Memoria:</b> 128GB', '<b>Pantalla:</b> 4.7p LTPS 120Hz', '<b>Batería:</b> 5,500 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Anbernic RG477V (128GB)', 3300, 'anbernic rg477v.jpg', ['<b>CPU:</b> Dimensity 8300 (4nm)', '<b>RAM:</b> 8GB LPDDR5X', '<b>Memoria:</b> 128GB (Expandible)', '<b>Pantalla:</b> 4.7p LTPS 120Hz', '<b>Batería:</b> 5,500 mAh (8h uso)'])" onmouseover="playEffect('soundHover')">
         <img src="anbernic rg477v.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz', '<b>Batería:</b> 6,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz / 3.9p Sec.', '<b>Batería:</b> 6,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="ayn thor.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Retroid Pocket 6', 4000, 'retroid pocket 6.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 8GB LPDDR5x', '<b>Memoria:</b> 128GB', '<b>Pantalla:</b> 5.5p AMOLED 120Hz'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Retroid Pocket 6 (128GB)', 4000, 'retroid pocket 6.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 8GB LPDDR5x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 120Hz', '<b>Batería:</b> 6,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 6.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['<b>CPU:</b> Snapdragon 8 Elite', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB', '<b>Pantalla:</b> 6p AMOLED 120Hz'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['<b>CPU:</b> Snapdragon 8 Elite', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz', '<b>Batería:</b> 8,000 mAh (60W)'])" onmouseover="playEffect('soundHover')">
         <img src="odin 3.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
