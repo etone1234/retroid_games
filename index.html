@@ -271,7 +271,7 @@ function checkout() {
     setTimeout(() => {
         let mensaje = "¡Hola RETROID_GAMES! Quisiera comprar:%0A%0A";
         cart.forEach(item => mensaje += "• " + item.name + " (Bs. " + item.price + ")%0A");
-        mensaje += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*%0A📍 La Paz - Bolivia";
+        mensaje += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) ;
         window.open("https://wa.me/59162347612?text=" + mensaje, "_blank");
     }, 500);
 }
