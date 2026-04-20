@@ -27,36 +27,96 @@
         overflow-x: hidden;
     }
 
-    /* HEADER CON LOGO.PNG */
+    /* HEADER AJUSTADO CON SUBTÍTULO */
     header {
-        background: rgba(15, 23, 42, 0.9);
+        background: rgba(15, 23, 42, 0.95);
         backdrop-filter: blur(10px);
         padding: 20px;
         text-align: center;
         border-bottom: 2px solid var(--neon-purple);
-        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 110px;
+        gap: 25px;
+        min-height: 120px;
     }
 
     .header-logo {
         max-height: 90px;
         width: auto;
         object-fit: contain;
-        filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.6));
+        filter: drop-shadow(0 0 10px var(--neon-purple));
     }
 
-    /* Modal de Características */
+    .brand-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        background: linear-gradient(to right, #fff, var(--neon-cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .header-subtitle {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 4px;
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        margin-top: 5px;
+        opacity: 0.9;
+    }
+
+    /* TARJETAS Y ANIMACIONES */
+    .card { 
+        background: rgba(30, 41, 59, 0.6); 
+        border-radius: 20px; 
+        padding: 20px; 
+        text-align: center; 
+        border: 1px solid rgba(255,255,255,0.1); 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        cursor: pointer;
+        position: relative;
+    }
+
+    .card:hover {
+        transform: translateY(-12px) scale(1.04);
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 35px rgba(6, 182, 212, 0.4);
+        background: rgba(30, 41, 59, 0.9);
+    }
+
+    .card img { 
+        width: 100%; 
+        height: 180px; 
+        object-fit: contain; 
+        margin-bottom: 15px; 
+        transition: 0.4s;
+    }
+
+    .card:hover img { transform: scale(1.1); }
+
+    /* Modal Estilo */
     .modal {
         display: none;
         position: fixed;
         z-index: 3000;
         left: 0; top: 0;
         width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.92);
-        backdrop-filter: blur(10px);
+        background-color: rgba(0,0,0,0.94);
+        backdrop-filter: blur(12px);
     }
 
     .modal-content {
@@ -66,88 +126,70 @@
         border: 2px solid var(--neon-cyan);
         width: 85%;
         max-width: 500px;
-        border-radius: 20px;
+        border-radius: 24px;
         position: relative;
         text-align: center;
-        box-shadow: 0 0 35px var(--neon-cyan);
+        box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
     }
 
     .close-modal { position: absolute; right: 20px; top: 10px; color: white; font-size: 30px; cursor: pointer; }
-    .modal-img { width: 100%; max-height: 200px; object-fit: contain; margin-bottom: 20px; }
     .specs-list { text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; margin: 20px 0; border-left: 4px solid var(--neon-cyan); }
-    .specs-list li { margin-bottom: 12px; color: #e2e8f0; font-size: 1rem; line-height: 1.4; }
-    .specs-list b { color: var(--neon-cyan); }
+    .specs-list li { margin-bottom: 12px; color: #cbd5e1; font-size: 1rem; list-style: none; }
 
-    /* Estilos Generales */
-    #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px var(--neon-purple); }
+    /* UI General */
+    #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; box-shadow: 0 0 10px var(--neon-purple); display: flex; align-items: center; justify-content: center; }
     .container { padding: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-right: 320px; }
-    .card { background: rgba(30, 41, 59, 0.6); border-radius: 20px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; }
-    .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 15px; }
-    .price { font-size: 24px; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; font-family: 'Orbitron'; }
-    .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 12px; border-radius: 10px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; }
+    .price { font-size: 26px; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; font-family: 'Orbitron'; text-shadow: 0 0 10px rgba(34, 197, 94, 0.3); }
+    .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 14px; border-radius: 12px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
     
-    /* Carrito */
+    /* Carrito lateral */
     #cart {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(15, 23, 42, 0.98);
         padding: 20px;
         border-radius: 20px;
         width: 260px;
         border: 1px solid var(--neon-purple);
         backdrop-filter: blur(10px);
         z-index: 1000;
-        max-height: 80vh;
+        max-height: 85vh;
         overflow-y: auto;
     }
 
-    #cart h3 { font-family: 'Orbitron'; color: var(--neon-purple); text-align: center; margin-top: 0; }
-    
-    .cart-item {
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        padding-bottom: 8px;
+    #cart h3 { font-family: 'Orbitron'; color: var(--neon-purple); text-align: center; margin-top: 0; letter-spacing: 2px; }
+    .cart-item { font-size: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
+    .remove-btn { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 16px; }
+    #total { font-family: 'Orbitron'; text-align: center; color: var(--neon-cyan); margin: 20px 0; font-size: 1.2rem; }
+    .checkout { background: var(--neon-green); border: none; padding: 15px; width: 100%; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; }
+
+    footer { background: rgba(15, 23, 42, 0.9); padding: 50px 20px; text-align: center; border-top: 2px solid var(--neon-purple); margin-top: 60px; font-family: 'Orbitron'; }
+    .social-btn { text-decoration: none; color: white; padding: 12px 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 12px; transition: 0.3s; }
+    .social-btn:hover { background: white; color: black; transform: scale(1.05); }
+
+    @media (max-width: 900px) { 
+        header { flex-direction: column; gap: 15px; }
+        .brand-container { align-items: center; }
+        .header-title { font-size: 1.8rem; }
+        .container { margin-right: 0; margin-bottom: 400px; } 
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 24px 24px 0 0; } 
     }
-
-    .remove-btn {
-        background: none;
-        border: none;
-        color: var(--neon-red);
-        cursor: pointer;
-        font-size: 16px;
-        padding: 0 5px;
-        transition: 0.2s;
-    }
-
-    .remove-btn:hover { transform: scale(1.2); color: #ff6b6b; }
-
-    #total { font-family: 'Orbitron'; text-align: center; color: var(--neon-cyan); margin: 15px 0; }
-    .checkout { background: var(--neon-green); border: none; padding: 15px; width: 100%; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
-
-    footer { background: rgba(15, 23, 42, 0.9); padding: 40px 20px; text-align: center; border-top: 2px solid var(--neon-purple); margin-top: 50px; font-family: 'Orbitron'; }
-    .social-btn { text-decoration: none; color: white; padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px; }
-
-    @media (max-width: 900px) { .container { margin-right: 0; margin-bottom: 380px; } #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; } }
 </style>
 </head>
 <body onclick="startMusic()">
 
 <audio id="bgMusic" loop><source src="04 Judgment -X- (Stage 1-1).mp3" type="audio/mpeg"></audio>
-<audio id="soundHover" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+<audio id="soundHover" src="https://cdn.pixabay.com/audio/2022/03/15/audio_731422312b.mp3"></audio>
 <audio id="soundAdd" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
 <audio id="soundCustom" src="notification_message-notification-22-270130.mp3"></audio>
 
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img id="modalImg" class="modal-img" src="">
+        <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin-bottom:20px;">
         <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan); margin-bottom:10px;"></h2>
-        <div class="specs-list"><ul id="modalSpecs" style="list-style: none; padding: 0;"></ul></div>
+        <div class="specs-list"><ul id="modalSpecs" style="padding: 0;"></ul></div>
         <div id="modalPrice" class="price"></div>
         <button id="modalAddBtn" class="btn-add">AÑADIR AL CARRITO</button>
     </div>
@@ -158,7 +200,11 @@
 </button>
 
 <header>
-    <img src="logo.png" alt="RETROID_GAMES BOLIVIA" class="header-logo">
+    <img src="logo.jpg" alt="Logo" class="header-logo">
+    <div class="brand-container">
+        <h1 class="header-title">RETROID GAMES</h1>
+        <span class="header-subtitle">Retro Consoles Gaming For You</span>
+    </div>
 </header>
 
 <div id="cart">
@@ -171,42 +217,42 @@
 </div>
 
 <div class="container">
-    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['<b>CPU:</b> Snapdragon 865', '<b>RAM:</b> 8GB LPDDR4x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 1080p 60Hz', '<b>Batería:</b> 5,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['CPU: Snapdragon 865', 'RAM: 8GB LPDDR4x', 'Memoria: 128GB UFS 3.1', 'Pantalla: 5.5p AMOLED 1080p', 'Batería: 5,000 mAh'])" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 5.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 512GB UFS 4.0', '<b>Pantalla:</b> 7p OLED 1080p 120Hz', '<b>Batería:</b> 8,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['CPU: Snapdragon 8 Gen 2', 'RAM: 12GB LPDDR5X', 'Memoria: 512GB UFS 4.0', 'Pantalla: 7p OLED 120Hz', 'Batería: 8,000 mAh'])" onmouseover="playEffect('soundHover')">
         <img src="odin2portal.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Anbernic RG477V (128GB)', 3300, 'anbernic rg477v.jpg', ['<b>CPU:</b> Dimensity 8300 (4nm)', '<b>RAM:</b> 8GB LPDDR5X', '<b>Memoria:</b> 128GB (Expandible)', '<b>Pantalla:</b> 4.7p LTPS 120Hz', '<b>Batería:</b> 5,500 mAh (8h uso)'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Anbernic RG477V', 3300, 'anbernic rg477v.jpg', ['CPU: Dimensity 8300 (4nm)', 'RAM: 8GB LPDDR5X', 'Memoria: 128GB', 'Pantalla: 4.7p LTPS 120Hz', 'Batería: 5,500 mAh'])" onmouseover="playEffect('soundHover')">
         <img src="anbernic rg477v.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz / 3.9p Sec.', '<b>Batería:</b> 6,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['CPU: Snapdragon 8 Gen 2', 'RAM: 12GB LPDDR5X', 'Memoria: 256GB UFS 4.0', 'Pantalla: 6p AMOLED 120Hz', 'Batería: 6,000 mAh'])" onmouseover="playEffect('soundHover')">
         <img src="ayn thor.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Retroid Pocket 6 (128GB)', 4000, 'retroid pocket 6.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 8GB LPDDR5x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 120Hz', '<b>Batería:</b> 6,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Retroid Pocket 6', 4000, 'retroid pocket 6.jpg', ['CPU: Snapdragon 8 Gen 2', 'RAM: 8GB LPDDR5x', 'Memoria: 128GB', 'Pantalla: 5.5p AMOLED 120Hz'])" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 6.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['<b>CPU:</b> Snapdragon 8 Elite', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz', '<b>Batería:</b> 8,000 mAh (60W)'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['CPU: Snapdragon 8 Elite', 'RAM: 12GB LPDDR5X', 'Memoria: 256GB', 'Pantalla: 6p AMOLED 120Hz'])" onmouseover="playEffect('soundHover')">
         <img src="odin 3.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
@@ -215,10 +261,10 @@
 </div>
 
 <footer>
-    <div style="margin-bottom: 20px; font-size: 1.2rem;">📍 LA PAZ - BOLIVIA</div>
+    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--neon-cyan);">📍 EL ALTO - BOLIVIA</div>
     <div class="social-links">
-        <a href="https://www.tiktok.com/@retroid_games" target="_blank" class="social-btn tiktok" onmouseover="playEffect('soundHover')">
-            <i class="fab fa-tiktok"></i> TikTok
+        <a href="https://www.tiktok.com/@retroid_games" target="_blank" class="social-btn" onmouseover="playEffect('soundHover')">
+            <i class="fab fa-tiktok"></i> TikTok @retroid_games
         </a>
     </div>
 </footer>
@@ -231,7 +277,7 @@ let musicStarted = false;
 function startMusic() {
     if (!musicStarted) {
         const music = document.getElementById('bgMusic');
-        music.volume = 0.5;
+        music.volume = 0.4;
         music.play().catch(() => {});
         musicStarted = true;
     }
@@ -242,7 +288,7 @@ function openSpecs(name, price, img, specs) {
     document.getElementById('modalTitle').innerText = name;
     document.getElementById('modalPrice').innerText = 'Bs. ' + price;
     let specsHtml = '';
-    specs.forEach(s => specsHtml += `<li>⚡ ${s}</li>`);
+    specs.forEach(s => specsHtml += `<li>⚡ <b>${s.split(':')[0]}:</b> ${s.split(':')[1]}</li>`);
     document.getElementById('modalSpecs').innerHTML = specsHtml;
     document.getElementById('modalAddBtn').onclick = () => { addToCart(name, price); closeModal(); };
     document.getElementById('productModal').style.display = "block";
@@ -250,7 +296,6 @@ function openSpecs(name, price, img, specs) {
 }
 
 function closeModal() { document.getElementById('productModal').style.display = "none"; }
-window.onclick = function(e) { if(e.target == document.getElementById('productModal')) closeModal(); }
 
 function toggleAllSound(e) {
     e.stopPropagation();
@@ -263,7 +308,9 @@ function toggleAllSound(e) {
 function playEffect(id) {
     if(soundEnabled) {
         const s = document.getElementById(id);
-        s.currentTime = 0; s.play().catch(() => {});
+        s.currentTime = 0;
+        s.volume = 0.3;
+        s.play().catch(() => {});
     }
 }
 
@@ -275,7 +322,6 @@ function addToCart(name, price) {
 
 function removeFromCart(index) {
     cart.splice(index, 1);
-    playEffect('soundAdd');
     renderCart();
 }
 
@@ -285,16 +331,10 @@ function renderCart() {
     let total = 0;
     cart.forEach((item, index) => {
         total += item.price;
-        list.innerHTML += `
-            <div class="cart-item">
-                <div style="flex:1;">
-                    <b>${item.name}</b><br>
-                    <span style="color:var(--neon-green)">Bs.${item.price}</span>
-                </div>
-                <button class="remove-btn" onclick="removeFromCart(${index})">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>`;
+        list.innerHTML += `<div class="cart-item">
+            <div style="flex:1;"><b>${item.name}</b><br><span style="color:var(--neon-green)">Bs.${item.price}</span></div>
+            <button class="remove-btn" onclick="removeFromCart(${index})"><i class="fas fa-trash-alt"></i></button>
+        </div>`;
     });
     document.getElementById('total').innerText = 'Total: Bs. ' + total;
 }
