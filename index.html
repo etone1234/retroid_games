@@ -27,7 +27,7 @@
         overflow-x: hidden;
     }
 
-    /* HEADER CON LOGO MEJORADO */
+    /* HEADER CONFIGURADO PARA LOGO.JPG */
     header {
         background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);
@@ -44,12 +44,12 @@
     .header-logo {
         max-height: 100px;
         width: auto;
-        display: block; /* Asegura que no se oculte */
+        display: block;
         object-fit: contain;
         filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.7));
     }
 
-    /* ANIMACIONES RESTAURADAS PARA PRODUCTOS */
+    /* ANIMACIONES DE PRODUCTOS */
     .card { 
         background: rgba(30, 41, 59, 0.6); 
         border-radius: 20px; 
@@ -59,7 +59,6 @@
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         cursor: pointer;
         position: relative;
-        overflow: hidden;
     }
 
     .card:hover {
@@ -81,7 +80,7 @@
         transform: scale(1.1);
     }
 
-    /* Modal de Características */
+    /* Modal */
     .modal {
         display: none;
         position: fixed;
@@ -109,14 +108,12 @@
     .modal-img { width: 100%; max-height: 200px; object-fit: contain; margin-bottom: 20px; }
     .specs-list { text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; margin: 20px 0; border-left: 4px solid var(--neon-cyan); }
     .specs-list li { margin-bottom: 12px; color: #e2e8f0; font-size: 1rem; line-height: 1.4; }
-    .specs-list b { color: var(--neon-cyan); }
 
-    /* Botones y Controles */
+    /* Botones y Sonido */
     #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px var(--neon-purple); }
     .container { padding: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-right: 320px; }
     .price { font-size: 24px; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; font-family: 'Orbitron'; }
     .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 12px; border-radius: 10px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
-    .btn-add:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--neon-purple); }
     
     /* Carrito */
     #cart {
@@ -137,7 +134,6 @@
     #cart h3 { font-family: 'Orbitron'; color: var(--neon-purple); text-align: center; margin-top: 0; }
     .cart-item { font-size: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
     .remove-btn { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 16px; padding: 0 5px; transition: 0.2s; }
-    .remove-btn:hover { transform: scale(1.2); color: #ff6b6b; }
     #total { font-family: 'Orbitron'; text-align: center; color: var(--neon-cyan); margin: 15px 0; }
     .checkout { background: var(--neon-green); border: none; padding: 15px; width: 100%; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
@@ -170,7 +166,7 @@
 </button>
 
 <header>
-    <img src="./logo.png" alt="RETROID_GAMES BOLIVIA" class="header-logo" onerror="this.style.display='none'; alert('Error: No se encuentra logo.png en la carpeta principal')">
+    <img src="logo.jpg" alt="RETROID_GAMES BOLIVIA" class="header-logo">
 </header>
 
 <div id="cart">
