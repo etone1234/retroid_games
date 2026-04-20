@@ -3,159 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RETROID_GAMES BOLIVIA</title>
+<title>RETROID_GAMES | Store Bolivia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-    /* Variables de colores Neón */
     :root {
         --neon-purple: #7c3aed;
         --neon-cyan: #06b6d4;
         --neon-green: #22c55e;
-        --dark-bg: #0f172a;
+        --dark-bg: #020617;
     }
 
+    /* Estilos Generales y Animaciones de Fondo */
     body {
-        margin:0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: var(--dark-bg);
+        margin: 0;
+        font-family: 'Rajdhani', sans-serif;
+        background-color: var(--dark-bg);
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
         color: white;
-        background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+        overflow-x: hidden;
     }
 
+    /* Animaciones */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse-green {
+        0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+        70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    /* Header Estilo Cyberpunk */
     header {
-        background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(10px);
         padding: 30px;
         text-align: center;
         font-family: 'Orbitron', sans-serif;
-        font-size: 32px;
-        font-weight: bold;
-        box-shadow: 0 5px 20px rgba(124, 58, 237, 0.5);
+        font-size: 28px;
+        border-bottom: 2px solid var(--neon-purple);
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
         letter-spacing: 3px;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
 
+    /* Contenedor de Productos */
     .container {
         padding: 40px;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 30px;
-        margin-right: 300px; /* Espacio para el carrito */
+        margin-right: 320px;
     }
 
+    /* Tarjetas de Consolas */
     .card {
-        background: #1e293b;
+        background: rgba(30, 41, 59, 0.6);
         border-radius: 20px;
         padding: 20px;
         text-align: center;
         border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.8s ease backwards;
     }
 
     .card:hover {
         transform: translateY(-10px);
         border-color: var(--neon-cyan);
-        box-shadow: 0 0 20px var(--neon-cyan);
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
     }
 
     .card img {
         width: 100%;
-        border-radius: 15px;
-        height: 200px;
+        height: 180px;
         object-fit: contain;
-        background: #020617;
         margin-bottom: 15px;
+        animation: float 4s ease-in-out infinite;
     }
 
-    .card h2, .card h3, .card h1 {
+    .card h2 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 1.2rem;
-        margin: 10px 0;
+        font-size: 1.1rem;
         color: var(--neon-cyan);
+        margin: 10px 0;
     }
 
     .price {
+        font-size: 24px;
         color: var(--neon-green);
-        font-size: 26px;
         font-weight: bold;
-        margin: 15px 0;
-        text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+        margin-bottom: 15px;
     }
 
-    button {
+    /* Botones Neón */
+    .btn-add {
         background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
         border: none;
         padding: 12px;
-        border-radius: 12px;
+        border-radius: 10px;
         color: white;
+        font-family: 'Orbitron', sans-serif;
         font-weight: bold;
         cursor: pointer;
         width: 100%;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 14px;
         transition: 0.3s;
     }
 
-    button:hover {
+    .btn-add:hover {
         filter: brightness(1.2);
-        box-shadow: 0 0 15px var(--neon-purple);
+        box-shadow: 0 0 15px var(--neon-cyan);
     }
 
-    /* Estilo del Carrito Lateral */
+    /* Carrito Flotante */
     #cart {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: rgba(2, 6, 23, 0.9);
-        padding: 25px;
+        background: rgba(15, 23, 42, 0.95);
+        padding: 20px;
         border-radius: 20px;
         width: 260px;
-        border: 2px solid var(--neon-purple);
-        box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+        border: 1px solid var(--neon-purple);
+        box-shadow: 0 0 30px rgba(0,0,0,0.5);
         backdrop-filter: blur(10px);
+        z-index: 1000;
     }
 
-    #cart h6 {
-        margin: 0 0 15px 0;
-        font-size: 20px;
+    #cart h3 {
         font-family: 'Orbitron', sans-serif;
+        font-size: 18px;
         color: var(--neon-purple);
         text-align: center;
-        border-bottom: 1px solid #334155;
-        padding-bottom: 10px;
+        margin-top: 0;
     }
 
     .cart-item {
         font-size: 14px;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
         display: flex;
         justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     #total {
-        font-weight: bold;
-        color: var(--neon-cyan);
         font-family: 'Orbitron', sans-serif;
-        margin-top: 15px;
         text-align: center;
         font-size: 18px;
+        color: var(--neon-cyan);
+        margin: 15px 0;
     }
 
     .checkout {
         background: var(--neon-green);
-        margin-top: 15px;
-        font-size: 16px;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        animation: pulse-green 2s infinite;
     }
 
-    /* Ajuste para móviles */
-    @media (max-width: 800px) {
-        .container { margin-right: 0; margin-bottom: 300px; }
-        #cart { position: relative; width: auto; margin: 20px; top: 0; right: 0; }
+    /* Footer / Dirección */
+    .footer {
+        background: rgba(15, 23, 42, 0.9);
+        padding: 40px;
+        text-align: center;
+        border-top: 1px solid var(--neon-purple);
+        margin-top: 50px;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .footer-content {
+        color: var(--neon-cyan);
+        font-size: 18px;
+        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .footer-line {
+        width: 60px;
+        height: 3px;
+        background: var(--neon-purple);
+        margin: 15px auto;
+        box-shadow: 0 0 10px var(--neon-purple);
+    }
+
+    /* Responsivo Celulares */
+    @media (max-width: 900px) {
+        .container { margin-right: 0; padding: 20px; margin-bottom: 350px; }
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; }
     }
 </style>
 </head>
@@ -165,57 +219,65 @@
 <header>🎮 RETROID_GAMES BOLIVIA</header>
 
 <div id="cart">
-    <h6>🛒 MI PEDIDO</h6>
+    <h3><i class="fas fa-shopping-cart"></i> MI PEDIDO</h3>
     <div id="cart-items"></div>
     <div id="total">Total: Bs. 0</div>
     <button class="checkout" onclick="checkout()">
-        <i class="fab fa-whatsapp"></i> PAGAR POR WA
+        <i class="fab fa-whatsapp"></i> ENVIAR A WHATSAPP
     </button>
 </div>
 
 <div class="container">
-    <div class="card">
-        <img src="retroid pocket 5.jpg">
+    <div class="card" style="animation-delay: 0.1s;">
+        <img src="retroid pocket 5.jpg" alt="RP5">
         <h2>Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
-        <button onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
+        <button class="btn-add" onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card">
-        <img src="odin2portal.jpg">
+    <div class="card" style="animation-delay: 0.2s;">
+        <img src="odin2portal.jpg" alt="Odin 2">
         <h2>AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
-        <button onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
+        <button class="btn-add" onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card">
-        <img src="anbernic rg477v.jpg">
+    <div class="card" style="animation-delay: 0.3s;">
+        <img src="anbernic rg477v.jpg" alt="RG477V">
         <h2>Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
-        <button onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
+        <button class="btn-add" onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card">
-        <img src="ayn thor.jpg">
+    <div class="card" style="animation-delay: 0.4s;">
+        <img src="ayn thor.jpg" alt="Thor Pro">
         <h2>AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
-        <button onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
+        <button class="btn-add" onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card">
-        <img src="retroid pocket 6.jpg">
+    <div class="card" style="animation-delay: 0.5s;">
+        <img src="retroid pocket 6.jpg" alt="RP6">
         <h2>Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
-        <button onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
+        <button class="btn-add" onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card">
-        <img src="odin 3.jpg">
+    <div class="card" style="animation-delay: 0.6s;">
+        <img src="odin 3.jpg" alt="Odin 3">
         <h2>AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
-        <button onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
+        <button class="btn-add" onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
     </div>
 </div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <i class="fas fa-map-marker-alt"></i> 
+        <span>DIRECCIÓN: LA PAZ - BOLIVIA</span>
+    </div>
+    <div class="footer-line"></div>
+</footer>
 
 <script>
 let cart = [];
@@ -244,21 +306,21 @@ function renderCart() {
 
 function checkout() {
     if(cart.length === 0){
-        alert('Agrega al menos una consola al carrito');
+        alert('El carrito está vacío');
     } else {
-        let mensaje = "¡Hola! Quisiera comprar estas consolas retro:%0A%0A";
+        let mensaje = "¡Hola! Quisiera comprar estas consolas:%0A%0A";
         let total = 0;
 
         cart.forEach(item => {
-            mensaje += "• " + item.name + " (Bs. " + item.price + ")%0A";
+            mensaje += "🕹️ " + item.name + " (Bs. " + item.price + ")%0A";
             total += item.price;
         });
 
         mensaje += "%0A*Total: Bs. " + total + "*";
+        mensaje += "%0A📍 Dirección: La Paz, Bolivia";
 
-        // Tu número de WhatsApp correctamente vinculado
+        // Tu número ya configurado
         let numero = "59162347612"; 
-
         window.open("https://wa.me/" + numero + "?text=" + mensaje, "_blank");
     }
 }
