@@ -95,7 +95,7 @@ function renderCart() {
 
   cart.forEach(item => {
     total += item.price;
-    cartItems.innerHTML += <div class="cart-item">${item.name} - $${item.price}</div>;
+    cartItems.innerHTML += `<div class="cart-item">${item.name} - Bs. ${item.price}</div>`;
   });
 
   document.getElementById('total').innerText = 'Total: $' + total;
