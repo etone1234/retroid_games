@@ -66,15 +66,6 @@
         text-transform: uppercase;
     }
 
-    .header-subtitle {
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 1.1rem;
-        color: var(--neon-cyan);
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-top: 5px;
-    }
-
     .container { 
         padding: 40px; 
         display: grid; 
@@ -99,12 +90,11 @@
         box-shadow: 0 0 35px rgba(6, 182, 212, 0.4);
     }
 
-    .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 20px; transition: 0.4s; }
+    .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 20px; }
 
     .price { font-size: 26px; color: var(--neon-green); font-weight: bold; font-family: 'Orbitron'; margin-bottom: 15px; }
     .btn-add { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); border: none; padding: 12px; border-radius: 10px; color: white; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
 
-    /* CARRITO ACTUALIZADO CON BOTÓN ELIMINAR */
     #cart {
         position: fixed;
         top: 20px; right: 20px;
@@ -124,16 +114,7 @@
         border-radius: 10px;
     }
 
-    .btn-remove {
-        background: none;
-        border: none;
-        color: var(--neon-red);
-        cursor: pointer;
-        font-size: 1.1rem;
-        transition: 0.2s;
-    }
-
-    .btn-remove:hover { transform: scale(1.2); }
+    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; transition: 0.2s; }
 
     .modal {
         display: none; position: fixed; z-index: 3000;
@@ -155,12 +136,10 @@
         border-top: 2px solid var(--neon-purple);
         margin-top: 50px;
     }
-    .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-cyan); margin-bottom: 5px; }
-    .footer-year { font-family: 'Orbitron'; font-size: 1.1rem; color: white; opacity: 0.7; margin-bottom: 20px; }
-    .social-btn { text-decoration: none; color: white; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; }
+    .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-cyan); }
+    .social-btn { text-decoration: none; color: white; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; }
 
     @media (max-width: 1000px) {
-        header { flex-direction: column; }
         .container { margin-right: 0; margin-bottom: 350px; }
         #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 25px 25px 0 0; }
     }
@@ -169,19 +148,14 @@
 <body onclick="startMusic()">
 
 <audio id="bgMusic" loop><source src="04 Judgment -X- (Stage 1-1).mp3" type="audio/mpeg"></audio>
-<audio id="soundCard" src="animacion.MP3"></audio>
-<audio id="soundAdd" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
-<audio id="soundRemove" src="https://assets.mixkit.co/active_storage/sfx/2564/2564-preview.mp3"></audio>
-<audio id="soundCustom" src="notification_message-notification-22-270130.mp3"></audio>
-
-<div id="productModal" class="modal">
+<audio id="soundCard" src="animacion.MP3"></audio> <audio id="soundAction" src="animacion.MP3"></audio> <div id="productModal" class="modal">
     <div class="modal-content">
         <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan);"></h2>
         <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0;">
         <ul id="modalSpecs" class="specs-list"></ul>
         <div id="modalPrice" class="price"></div>
         <button class="btn-add" id="modalAddBtn">AÑADIR AL CARRITO</button>
-        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px; display:block; width:100%;">CERRAR</button>
+        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px;">CERRAR</button>
     </div>
 </div>
 
@@ -189,7 +163,7 @@
     <img src="logo.jpg" alt="Logo" class="header-logo">
     <div class="brand-text">
         <h1 class="header-title">RETROID GAMES</h1>
-        <span class="header-subtitle">Retro Consoles Gaming For You</span>
+        <span style="color:var(--neon-cyan); letter-spacing:3px;">Retro Consoles Gaming For You</span>
     </div>
 </header>
 
@@ -248,7 +222,7 @@
 
 <footer>
     <div class="footer-location">La Paz - Bolivia</div>
-    <div class="footer-year">2026</div>
+    <div style="font-family:'Orbitron'; opacity:0.7;">2026</div>
     <a href="https://www.tiktok.com/@retroid_games" target="_blank" class="social-btn">
         <i class="fab fa-tiktok"></i> TikTok @retroid_games
     </a>
@@ -260,23 +234,22 @@ let musicStarted = false;
 
 function startMusic() {
     if (!musicStarted) {
-        document.getElementById('bgMusic').volume = 0.3;
+        document.getElementById('bgMusic').volume = 0.2;
         document.getElementById('bgMusic').play().catch(()=>{});
         musicStarted = true;
     }
 }
 
 function openSpecs(name, price, img, specs) {
-    const sound = document.getElementById('soundCard');
-    sound.currentTime = 0;
-    sound.play().catch(()=>{});
+    const s = document.getElementById('soundCard');
+    s.currentTime = 0; s.play().catch(()=>{});
 
     document.getElementById('modalTitle').innerText = name;
     document.getElementById('modalImg').src = img;
     document.getElementById('modalPrice').innerText = 'Bs. ' + price;
     
     let html = '';
-    specs.forEach(s => html += `<li><i class="fas fa-bolt" style="color:var(--neon-cyan)"></i> ${s}</li>`);
+    specs.forEach(item => html += `<li><i class="fas fa-bolt" style="color:var(--neon-cyan)"></i> ${item}</li>`);
     document.getElementById('modalSpecs').innerHTML = html;
     
     document.getElementById('modalAddBtn').onclick = () => { addToCart(name, price); closeModal(); };
@@ -287,13 +260,13 @@ function closeModal() { document.getElementById('productModal').style.display = 
 
 function addToCart(name, price) {
     cart.push({name, price, id: Date.now()});
-    document.getElementById('soundAdd').play().catch(()=>{});
+    document.getElementById('soundAction').currentTime = 0;
+    document.getElementById('soundAction').play().catch(()=>{});
     renderCart();
 }
 
 function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    document.getElementById('soundRemove').play().catch(()=>{});
+    cart = cart.filter(i => i.id !== id);
     renderCart();
 }
 
@@ -318,14 +291,10 @@ function renderCart() {
 }
 
 function checkout() {
-    if(cart.length === 0) return alert('El carrito está vacío');
-    document.getElementById('soundCustom').play().catch(()=>{});
-    setTimeout(() => {
-        let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A";
-        cart.forEach(i => text += "• " + i.name + " (Bs. " + i.price + ")%0A");
-        text += "%0ATotal: Bs. " + document.getElementById('total').innerText.split('Bs. ')[1];
-        window.open("https://wa.me/59162347612?text=" + text, "_blank");
-    }, 800);
+    if(cart.length === 0) return;
+    let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A";
+    cart.forEach(i => text += "• " + i.name + "%0A");
+    window.open("https://wa.me/59162347612?text=" + text, "_blank");
 }
 </script>
 </body>
