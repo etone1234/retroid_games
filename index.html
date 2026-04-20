@@ -37,7 +37,6 @@
         box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
     }
 
-    /* Control de Sonido */
     #sound-control {
         position: fixed;
         top: 20px;
@@ -74,7 +73,6 @@
     .card:hover {
         border-color: var(--neon-cyan);
         transform: translateY(-5px);
-        box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
     }
 
     .card img {
@@ -111,7 +109,6 @@
         border-radius: 20px;
         width: 260px;
         border: 1px solid var(--neon-purple);
-        backdrop-filter: blur(10px);
     }
 
     .checkout {
@@ -123,7 +120,6 @@
         color: white;
         font-weight: bold;
         cursor: pointer;
-        margin-top: 10px;
     }
 
     footer {
@@ -135,7 +131,7 @@
 
     @media (max-width: 900px) {
         .container { margin-right: 0; margin-bottom: 350px; }
-        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; }
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; }
     }
 </style>
 </head>
@@ -147,8 +143,8 @@
 <audio id="soundAdd" preload="auto">
     <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
 </audio>
-<audio id="soundCash" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3" type="audio/mpeg">
+<audio id="soundWater" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/701/701-preview.mp3" type="audio/mpeg">
 </audio>
 
 <button id="sound-control" onclick="unlockAudio()">
@@ -161,7 +157,9 @@
     <h3 style="text-align: center; color: var(--neon-purple); font-family: 'Orbitron';">CARRITO</h3>
     <div id="cart-items"></div>
     <div id="total" style="text-align: center; margin: 10px 0; font-family: 'Orbitron'; color: var(--neon-cyan);">Total: Bs. 0</div>
-    <button class="checkout" onclick="checkout()">PAGAR POR WA</button>
+    <button class="checkout" onclick="checkout()">
+        <i class="fab fa-whatsapp"></i> PAGAR POR WHATSAPP
+    </button>
 </div>
 
 <div class="container">
@@ -171,11 +169,40 @@
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
+
     <div class="card" onmouseover="playHover()">
         <img src="odin2portal.jpg">
         <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
+    </div>
+
+    <div class="card" onmouseover="playHover()">
+        <img src="anbernic rg477v.jpg">
+        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">Anbernic RG477V</h2>
+        <div class="price">Bs. 3300</div>
+        <button class="btn-add" onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
+    </div>
+
+    <div class="card" onmouseover="playHover()">
+        <img src="ayn thor.jpg">
+        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Thor Pro</h2>
+        <div class="price">Bs. 6000</div>
+        <button class="btn-add" onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
+    </div>
+
+    <div class="card" onmouseover="playHover()">
+        <img src="retroid pocket 6.jpg">
+        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">Retroid Pocket 6</h2>
+        <div class="price">Bs. 4000</div>
+        <button class="btn-add" onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
+    </div>
+
+    <div class="card" onmouseover="playHover()">
+        <img src="odin 3.jpg">
+        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Odin 3 Pro</h2>
+        <div class="price">Bs. 6300</div>
+        <button class="btn-add" onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
     </div>
 </div>
 
@@ -188,17 +215,16 @@ let cart = [];
 let soundEnabled = true;
 let audioUnlocked = false;
 
-// Esta función "despierta" los sonidos (necesaria por seguridad del navegador)
 function unlockAudio() {
     audioUnlocked = true;
     soundEnabled = !soundEnabled;
     const icon = document.getElementById('sound-icon');
     icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
     
-    // Reproduce un sonido silencioso para desbloquear el canal
+    // Desbloqueo inicial
     document.getElementById('soundHover').play().then(() => {
         document.getElementById('soundHover').pause();
-    }).catch(e => console.log("Audio esperando interacción"));
+    }).catch(e => {});
 }
 
 function playHover() {
@@ -206,19 +232,17 @@ function playHover() {
         let s = document.getElementById('soundHover');
         s.volume = 0.2;
         s.currentTime = 0;
-        s.play();
+        s.play().catch(e => {});
     }
 }
 
 function addToCart(name, price) {
-    // Si no han desbloqueado el audio, lo intentamos desbloquear al primer clic
     if(!audioUnlocked) audioUnlocked = true;
-    
     cart.push({name, price});
     if(soundEnabled) {
         let s = document.getElementById('soundAdd');
         s.currentTime = 0;
-        s.play();
+        s.play().catch(e => {});
     }
     renderCart();
 }
@@ -229,23 +253,27 @@ function renderCart() {
     let total = 0;
     cart.forEach(item => {
         total += item.price;
-        cartItems.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:5px;">
+        cartItems.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:5px; border-bottom: 1px solid rgba(255,255,255,0.1)">
             <span>${item.name}</span><span>Bs.${item.price}</span></div>`;
     });
     document.getElementById('total').innerText = 'Total: Bs. ' + total;
 }
 
 function checkout() {
-    if(cart.length === 0) return alert('Carrito vacío');
+    if(cart.length === 0) return alert('El carrito está vacío');
     
-    if(soundEnabled) document.getElementById('soundCash').play();
+    // Reproduce el sonido de la GOTA DE AGUA
+    if(soundEnabled) {
+        let s = document.getElementById('soundWater');
+        s.play().catch(e => {});
+    }
     
     setTimeout(() => {
-        let mensaje = "¡Pedido desde la Web!%0A%0A";
+        let mensaje = "¡Hola RETROID_GAMES! Quisiera comprar:%0A%0A";
         cart.forEach(item => mensaje += "• " + item.name + " (Bs. " + item.price + ")%0A");
-        mensaje += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*";
+        mensaje += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*%0A📍 La Paz - Bolivia";
         window.open("https://wa.me/59162347612?text=" + mensaje, "_blank");
-    }, 600);
+    }, 500);
 }
 </script>
 </body>
