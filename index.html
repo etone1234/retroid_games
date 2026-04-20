@@ -16,7 +16,6 @@
         --dark-bg: #020617;
     }
 
-    /* Estilos Generales y Animaciones de Fondo */
     body {
         margin: 0;
         font-family: 'Rajdhani', sans-serif;
@@ -45,7 +44,6 @@
         100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
 
-    /* Header Estilo Cyberpunk */
     header {
         background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);
@@ -58,7 +56,25 @@
         letter-spacing: 3px;
     }
 
-    /* Contenedor de Productos */
+    /* Botón de Sonido */
+    #sound-control {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 2000;
+        background: rgba(124, 58, 237, 0.2);
+        border: 1px solid var(--neon-purple);
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .container {
         padding: 40px;
         display: grid;
@@ -67,7 +83,6 @@
         margin-right: 320px;
     }
 
-    /* Tarjetas de Consolas */
     .card {
         background: rgba(30, 41, 59, 0.6);
         border-radius: 20px;
@@ -98,7 +113,6 @@
         font-family: 'Orbitron', sans-serif;
         font-size: 1.1rem;
         color: var(--neon-cyan);
-        margin: 10px 0;
     }
 
     .price {
@@ -108,7 +122,6 @@
         margin-bottom: 15px;
     }
 
-    /* Botones Neón */
     .btn-add {
         background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
         border: none;
@@ -119,15 +132,9 @@
         font-weight: bold;
         cursor: pointer;
         width: 100%;
-        transition: 0.3s;
     }
 
-    .btn-add:hover {
-        filter: brightness(1.2);
-        box-shadow: 0 0 15px var(--neon-cyan);
-    }
-
-    /* Carrito Flotante */
+    /* Carrito */
     #cart {
         position: fixed;
         top: 20px;
@@ -144,10 +151,8 @@
 
     #cart h3 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 18px;
         color: var(--neon-purple);
         text-align: center;
-        margin-top: 0;
     }
 
     .cart-item {
@@ -161,7 +166,6 @@
     #total {
         font-family: 'Orbitron', sans-serif;
         text-align: center;
-        font-size: 18px;
         color: var(--neon-cyan);
         margin: 15px 0;
     }
@@ -178,8 +182,7 @@
         animation: pulse-green 2s infinite;
     }
 
-    /* Footer / Dirección */
-    .footer {
+    footer {
         background: rgba(15, 23, 42, 0.9);
         padding: 40px;
         text-align: center;
@@ -188,33 +191,23 @@
         font-family: 'Orbitron', sans-serif;
     }
 
-    .footer-content {
-        color: var(--neon-cyan);
-        font-size: 18px;
-        letter-spacing: 2px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .footer-line {
-        width: 60px;
-        height: 3px;
-        background: var(--neon-purple);
-        margin: 15px auto;
-        box-shadow: 0 0 10px var(--neon-purple);
-    }
-
-    /* Responsivo Celulares */
     @media (max-width: 900px) {
-        .container { margin-right: 0; padding: 20px; margin-bottom: 350px; }
-        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; }
+        .container { margin-right: 0; margin-bottom: 350px; }
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; }
+        #sound-control { top: auto; bottom: 360px; left: 10px; }
     }
 </style>
 </head>
 
 <body>
+
+<audio id="soundHover" src="https://www.soundjay.com/buttons/sounds/button-28.mp3"></audio>
+<audio id="soundAdd" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="soundCash" src="https://www.soundjay.com/misc/sounds/coins-way-in-3.mp3"></audio>
+
+<button id="sound-control" onclick="toggleSound()">
+    <i id="sound-icon" class="fas fa-volume-up"></i>
+</button>
 
 <header>🎮 RETROID_GAMES BOLIVIA</header>
 
@@ -223,67 +216,80 @@
     <div id="cart-items"></div>
     <div id="total">Total: Bs. 0</div>
     <button class="checkout" onclick="checkout()">
-        <i class="fab fa-whatsapp"></i> ENVIAR A WHATSAPP
+        <i class="fab fa-whatsapp"></i> ENVIAR PEDIDO
     </button>
 </div>
 
 <div class="container">
-    <div class="card" style="animation-delay: 0.1s;">
-        <img src="retroid pocket 5.jpg" alt="RP5">
+    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.1s;">
+        <img src="retroid pocket 5.jpg">
         <h2>Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" style="animation-delay: 0.2s;">
-        <img src="odin2portal.jpg" alt="Odin 2">
+    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.2s;">
+        <img src="odin2portal.jpg">
         <h2>AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" style="animation-delay: 0.3s;">
-        <img src="anbernic rg477v.jpg" alt="RG477V">
+    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.3s;">
+        <img src="anbernic rg477v.jpg">
         <h2>Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" style="animation-delay: 0.4s;">
-        <img src="ayn thor.jpg" alt="Thor Pro">
+    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.4s;">
+        <img src="ayn thor.jpg">
         <h2>AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" style="animation-delay: 0.5s;">
-        <img src="retroid pocket 6.jpg" alt="RP6">
+    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.5s;">
+        <img src="retroid pocket 6.jpg">
         <h2>Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
         <button class="btn-add" onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" style="animation-delay: 0.6s;">
-        <img src="odin 3.jpg" alt="Odin 3">
+    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.6s;">
+        <img src="odin 3.jpg">
         <h2>AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
         <button class="btn-add" onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
     </div>
 </div>
 
-<footer class="footer">
-    <div class="footer-content">
-        <i class="fas fa-map-marker-alt"></i> 
-        <span>DIRECCIÓN: LA PAZ - BOLIVIA</span>
-    </div>
-    <div class="footer-line"></div>
+<footer>
+    <i class="fas fa-map-marker-alt" style="color: var(--neon-purple);"></i> 
+    <span style="color: var(--neon-cyan); letter-spacing: 2px;"> DIRECCIÓN: LA PAZ - BOLIVIA</span>
 </footer>
 
 <script>
 let cart = [];
+let soundEnabled = true;
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    const icon = document.getElementById('sound-icon');
+    icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+}
+
+function playEffect(id) {
+    if(soundEnabled) {
+        const s = document.getElementById(id);
+        s.currentTime = 0;
+        s.play().catch(e => console.log("Audio waiting for user click"));
+    }
+}
 
 function addToCart(name, price) {
     cart.push({name, price});
+    playEffect('soundAdd');
     renderCart();
 }
 
@@ -291,37 +297,29 @@ function renderCart() {
     let cartItems = document.getElementById('cart-items');
     cartItems.innerHTML = '';
     let total = 0;
-
     cart.forEach(item => {
         total += item.price;
-        cartItems.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name}</span>
-                <span>Bs. ${item.price}</span>
-            </div>`;
+        cartItems.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>Bs.${item.price}</span></div>`;
     });
-
     document.getElementById('total').innerText = 'Total: Bs. ' + total;
 }
 
 function checkout() {
     if(cart.length === 0){
-        alert('El carrito está vacío');
+        alert('Carrito vacío');
     } else {
-        let mensaje = "¡Hola! Quisiera comprar estas consolas:%0A%0A";
-        let total = 0;
-
-        cart.forEach(item => {
-            mensaje += "🕹️ " + item.name + " (Bs. " + item.price + ")%0A";
-            total += item.price;
-        });
-
-        mensaje += "%0A*Total: Bs. " + total + "*";
-        mensaje += "%0A📍 Dirección: La Paz, Bolivia";
-
-        // Tu número ya configurado
-        let numero = "59162347612"; 
-        window.open("https://wa.me/" + numero + "?text=" + mensaje, "_blank");
+        playEffect('soundCash');
+        setTimeout(() => {
+            let mensaje = "¡Hola! Quisiera comprar estas consolas:%0A%0A";
+            let total = 0;
+            cart.forEach(item => {
+                mensaje += "🕹️ " + item.name + " (Bs. " + item.price + ")%0A";
+                total += item.price;
+            });
+            mensaje += "%0A*Total: Bs. " + total + "*%0A📍 La Paz - Bolivia";
+            let numero = "59162347612"; 
+            window.open("https://wa.me/" + numero + "?text=" + mensaje, "_blank");
+        }, 600);
     }
 }
 </script>
