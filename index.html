@@ -27,15 +27,35 @@
         overflow-x: hidden;
     }
 
+    /* HEADER OPTIMIZADO PARA EL LOGO */
     header {
-        background: rgba(15, 23, 42, 0.9);
+        /* Degradado de fondo con transparencia para efecto neón detrás del logo */
+        background: linear-gradient(90deg, rgba(124, 58, 237, 0.8), rgba(6, 182, 212, 0.8));
         backdrop-filter: blur(10px);
-        padding: 30px;
+        padding: 20px; /* Reducimos padding para centrar mejor el logo verticalmente */
         text-align: center;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 28px;
         border-bottom: 2px solid var(--neon-purple);
-        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        box-shadow: 0 0 30px rgba(124, 58, 237, 0.6); /* Brillo intenso */
+        
+        /* Centrado flexible para el logo */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 120px; /* Altura mínima para que el logo respire */
+    }
+
+    /* ESTILO PARA LA IMAGEN DEL LOGO */
+    .header-logo {
+        max-height: 100px; /* Ajusta este valor según el tamaño de tu logo */
+        width: auto; /* Mantiene la proporción */
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); /* Brillo suave alrededor del logo */
+        animation: logoPulse 4s infinite ease-in-out; /* Animación de pulso opcional */
+    }
+
+    /* Animación de pulso para el logo (opcional) */
+    @keyframes logoPulse {
+        0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); transform: scale(1); }
+        50% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8)); transform: scale(1.02); }
     }
 
     /* Modal */
@@ -145,7 +165,9 @@
     <i id="sound-icon" class="fas fa-volume-up"></i>
 </button>
 
-<header>🎮 RETROID_GAMES BOLIVIA</header>
+<header>
+    <img src="logo.png" alt="RETROID_GAMES BOLIVIA" class="header-logo">
+</header>
 
 <div id="cart">
     <h3>CARRITO</h3>
