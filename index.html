@@ -27,38 +27,28 @@
         overflow-x: hidden;
     }
 
-    /* HEADER OPTIMIZADO PARA EL LOGO */
+    /* HEADER CON LOGO.PNG */
     header {
-        /* Degradado de fondo con transparencia para efecto neón detrás del logo */
-        background: linear-gradient(90deg, rgba(124, 58, 237, 0.8), rgba(6, 182, 212, 0.8));
+        background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);
-        padding: 20px; /* Reducimos padding para centrar mejor el logo verticalmente */
+        padding: 20px;
         text-align: center;
         border-bottom: 2px solid var(--neon-purple);
-        box-shadow: 0 0 30px rgba(124, 58, 237, 0.6); /* Brillo intenso */
-        
-        /* Centrado flexible para el logo */
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 120px; /* Altura mínima para que el logo respire */
+        min-height: 110px;
     }
 
-    /* ESTILO PARA LA IMAGEN DEL LOGO */
     .header-logo {
-        max-height: 100px; /* Ajusta este valor según el tamaño de tu logo */
-        width: auto; /* Mantiene la proporción */
-        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); /* Brillo suave alrededor del logo */
-        animation: logoPulse 4s infinite ease-in-out; /* Animación de pulso opcional */
+        max-height: 90px;
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.6));
     }
 
-    /* Animación de pulso para el logo (opcional) */
-    @keyframes logoPulse {
-        0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); transform: scale(1); }
-        50% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8)); transform: scale(1.02); }
-    }
-
-    /* Modal */
+    /* Modal de Características */
     .modal {
         display: none;
         position: fixed;
@@ -79,15 +69,17 @@
         border-radius: 20px;
         position: relative;
         text-align: center;
+        box-shadow: 0 0 35px var(--neon-cyan);
     }
 
     .close-modal { position: absolute; right: 20px; top: 10px; color: white; font-size: 30px; cursor: pointer; }
     .modal-img { width: 100%; max-height: 200px; object-fit: contain; margin-bottom: 20px; }
     .specs-list { text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; margin: 20px 0; border-left: 4px solid var(--neon-cyan); }
-    .specs-list li { margin-bottom: 12px; color: #e2e8f0; font-size: 1rem; }
+    .specs-list li { margin-bottom: 12px; color: #e2e8f0; font-size: 1rem; line-height: 1.4; }
+    .specs-list b { color: var(--neon-cyan); }
 
     /* Estilos Generales */
-    #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; }
+    #sound-control { position: fixed; top: 20px; left: 20px; z-index: 2000; background: var(--neon-purple); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px var(--neon-purple); }
     .container { padding: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-right: 320px; }
     .card { background: rgba(30, 41, 59, 0.6); border-radius: 20px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; }
     .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 15px; }
@@ -179,42 +171,42 @@
 </div>
 
 <div class="container">
-    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['<b>CPU:</b> Snapdragon 865', '<b>RAM:</b> 8GB LPDDR4x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 1080p', '<b>Batería:</b> 5,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['<b>CPU:</b> Snapdragon 865', '<b>RAM:</b> 8GB LPDDR4x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 1080p 60Hz', '<b>Batería:</b> 5,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 5.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 512GB UFS 4.0', '<b>Pantalla:</b> 7p OLED 120Hz', '<b>Batería:</b> 8,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Odin 2 Portal Pro', 6000, 'odin2portal.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 512GB UFS 4.0', '<b>Pantalla:</b> 7p OLED 1080p 120Hz', '<b>Batería:</b> 8,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="odin2portal.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Anbernic RG477V', 3300, 'anbernic rg477v.jpg', ['<b>CPU:</b> Dimensity 8300 (4nm)', '<b>RAM:</b> 8GB LPDDR5X', '<b>Memoria:</b> 128GB', '<b>Pantalla:</b> 4.7p LTPS 120Hz', '<b>Batería:</b> 5,500 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Anbernic RG477V (128GB)', 3300, 'anbernic rg477v.jpg', ['<b>CPU:</b> Dimensity 8300 (4nm)', '<b>RAM:</b> 8GB LPDDR5X', '<b>Memoria:</b> 128GB (Expandible)', '<b>Pantalla:</b> 4.7p LTPS 120Hz', '<b>Batería:</b> 5,500 mAh (8h uso)'])" onmouseover="playEffect('soundHover')">
         <img src="anbernic rg477v.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz / 3.9p Sec.', '<b>Batería:</b> 6,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz / 3.9p Sec.', '<b>Batería:</b> 6,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="ayn thor.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('Retroid Pocket 6', 4000, 'retroid pocket 6.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 8GB LPDDR5x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 120Hz', '<b>Batería:</b> 6,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('Retroid Pocket 6 (128GB)', 4000, 'retroid pocket 6.jpg', ['<b>CPU:</b> Snapdragon 8 Gen 2', '<b>RAM:</b> 8GB LPDDR5x', '<b>Memoria:</b> 128GB UFS 3.1', '<b>Pantalla:</b> 5.5p AMOLED 120Hz', '<b>Batería:</b> 6,000 mAh (27W)'])" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 6.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
         <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['<b>CPU:</b> Snapdragon 8 Elite', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz', '<b>Batería:</b> 8,000 mAh'])" onmouseover="playEffect('soundHover')">
+    <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['<b>CPU:</b> Snapdragon 8 Elite', '<b>RAM:</b> 12GB LPDDR5X', '<b>Memoria:</b> 256GB UFS 4.0', '<b>Pantalla:</b> 6p AMOLED 120Hz', '<b>Batería:</b> 8,000 mAh (60W)'])" onmouseover="playEffect('soundHover')">
         <img src="odin 3.jpg">
         <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
@@ -283,7 +275,7 @@ function addToCart(name, price) {
 
 function removeFromCart(index) {
     cart.splice(index, 1);
-    playEffect('soundAdd'); // Sonido de confirmación
+    playEffect('soundAdd');
     renderCart();
 }
 
