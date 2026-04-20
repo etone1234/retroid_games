@@ -20,28 +20,10 @@
         margin: 0;
         font-family: 'Rajdhani', sans-serif;
         background-color: var(--dark-bg);
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-            radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
+        background-image: radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+                          radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
         color: white;
         overflow-x: hidden;
-    }
-
-    /* Animaciones */
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-    }
-
-    @keyframes pulse-green {
-        0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
-        70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
 
     header {
@@ -53,26 +35,23 @@
         font-size: 28px;
         border-bottom: 2px solid var(--neon-purple);
         box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
-        letter-spacing: 3px;
     }
 
-    /* Botón de Sonido */
+    /* Control de Sonido */
     #sound-control {
         position: fixed;
         top: 20px;
         left: 20px;
         z-index: 2000;
-        background: rgba(124, 58, 237, 0.2);
-        border: 1px solid var(--neon-purple);
+        background: var(--neon-purple);
+        border: none;
         color: white;
         padding: 10px;
         border-radius: 50%;
         cursor: pointer;
-        width: 45px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 50px;
+        height: 50px;
+        box-shadow: 0 0 15px var(--neon-purple);
     }
 
     .container {
@@ -89,16 +68,13 @@
         padding: 20px;
         text-align: center;
         border: 1px solid rgba(255,255,255,0.1);
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-        animation: fadeInUp 0.8s ease backwards;
+        transition: 0.3s;
     }
 
     .card:hover {
-        transform: translateY(-10px);
         border-color: var(--neon-cyan);
-        box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
     }
 
     .card img {
@@ -106,13 +82,6 @@
         height: 180px;
         object-fit: contain;
         margin-bottom: 15px;
-        animation: float 4s ease-in-out infinite;
-    }
-
-    .card h2 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.1rem;
-        color: var(--neon-cyan);
     }
 
     .price {
@@ -129,12 +98,10 @@
         border-radius: 10px;
         color: white;
         font-family: 'Orbitron', sans-serif;
-        font-weight: bold;
         cursor: pointer;
         width: 100%;
     }
 
-    /* Carrito */
     #cart {
         position: fixed;
         top: 20px;
@@ -144,30 +111,7 @@
         border-radius: 20px;
         width: 260px;
         border: 1px solid var(--neon-purple);
-        box-shadow: 0 0 30px rgba(0,0,0,0.5);
         backdrop-filter: blur(10px);
-        z-index: 1000;
-    }
-
-    #cart h3 {
-        font-family: 'Orbitron', sans-serif;
-        color: var(--neon-purple);
-        text-align: center;
-    }
-
-    .cart-item {
-        font-size: 14px;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    #total {
-        font-family: 'Orbitron', sans-serif;
-        text-align: center;
-        color: var(--neon-cyan);
-        margin: 15px 0;
     }
 
     .checkout {
@@ -179,117 +123,103 @@
         color: white;
         font-weight: bold;
         cursor: pointer;
-        animation: pulse-green 2s infinite;
+        margin-top: 10px;
     }
 
     footer {
-        background: rgba(15, 23, 42, 0.9);
         padding: 40px;
         text-align: center;
-        border-top: 1px solid var(--neon-purple);
-        margin-top: 50px;
         font-family: 'Orbitron', sans-serif;
+        color: var(--neon-cyan);
     }
 
     @media (max-width: 900px) {
         .container { margin-right: 0; margin-bottom: 350px; }
         #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; }
-        #sound-control { top: auto; bottom: 360px; left: 10px; }
     }
 </style>
 </head>
-
 <body>
 
-<audio id="soundHover" src="https://www.soundjay.com/buttons/sounds/button-28.mp3"></audio>
-<audio id="soundAdd" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
-<audio id="soundCash" src="https://www.soundjay.com/misc/sounds/coins-way-in-3.mp3"></audio>
+<audio id="soundHover" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+</audio>
+<audio id="soundAdd" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+</audio>
+<audio id="soundCash" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3" type="audio/mpeg">
+</audio>
 
-<button id="sound-control" onclick="toggleSound()">
+<button id="sound-control" onclick="unlockAudio()">
     <i id="sound-icon" class="fas fa-volume-up"></i>
 </button>
 
 <header>🎮 RETROID_GAMES BOLIVIA</header>
 
 <div id="cart">
-    <h3><i class="fas fa-shopping-cart"></i> MI PEDIDO</h3>
+    <h3 style="text-align: center; color: var(--neon-purple); font-family: 'Orbitron';">CARRITO</h3>
     <div id="cart-items"></div>
-    <div id="total">Total: Bs. 0</div>
-    <button class="checkout" onclick="checkout()">
-        <i class="fab fa-whatsapp"></i> ENVIAR PEDIDO
-    </button>
+    <div id="total" style="text-align: center; margin: 10px 0; font-family: 'Orbitron'; color: var(--neon-cyan);">Total: Bs. 0</div>
+    <button class="checkout" onclick="checkout()">PAGAR POR WA</button>
 </div>
 
 <div class="container">
-    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.1s;">
+    <div class="card" onmouseover="playHover()">
         <img src="retroid pocket 5.jpg">
-        <h2>Retroid Pocket 5</h2>
+        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
-
-    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.2s;">
+    <div class="card" onmouseover="playHover()">
         <img src="odin2portal.jpg">
-        <h2>AYN Odin 2 Portal Pro</h2>
+        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
-    </div>
-
-    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.3s;">
-        <img src="anbernic rg477v.jpg">
-        <h2>Anbernic RG477V</h2>
-        <div class="price">Bs. 3300</div>
-        <button class="btn-add" onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
-    </div>
-
-    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.4s;">
-        <img src="ayn thor.jpg">
-        <h2>AYN Thor Pro</h2>
-        <div class="price">Bs. 6000</div>
-        <button class="btn-add" onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
-    </div>
-
-    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.5s;">
-        <img src="retroid pocket 6.jpg">
-        <h2>Retroid Pocket 6</h2>
-        <div class="price">Bs. 4000</div>
-        <button class="btn-add" onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
-    </div>
-
-    <div class="card" onmouseover="playEffect('soundHover')" style="animation-delay: 0.6s;">
-        <img src="odin 3.jpg">
-        <h2>AYN Odin 3 Pro</h2>
-        <div class="price">Bs. 6300</div>
-        <button class="btn-add" onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
     </div>
 </div>
 
 <footer>
-    <i class="fas fa-map-marker-alt" style="color: var(--neon-purple);"></i> 
-    <span style="color: var(--neon-cyan); letter-spacing: 2px;"> DIRECCIÓN: LA PAZ - BOLIVIA</span>
+    <p>📍 LA PAZ - BOLIVIA</p>
 </footer>
 
 <script>
 let cart = [];
 let soundEnabled = true;
+let audioUnlocked = false;
 
-function toggleSound() {
+// Esta función "despierta" los sonidos (necesaria por seguridad del navegador)
+function unlockAudio() {
+    audioUnlocked = true;
     soundEnabled = !soundEnabled;
     const icon = document.getElementById('sound-icon');
     icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+    
+    // Reproduce un sonido silencioso para desbloquear el canal
+    document.getElementById('soundHover').play().then(() => {
+        document.getElementById('soundHover').pause();
+    }).catch(e => console.log("Audio esperando interacción"));
 }
 
-function playEffect(id) {
-    if(soundEnabled) {
-        const s = document.getElementById(id);
+function playHover() {
+    if(soundEnabled && audioUnlocked) {
+        let s = document.getElementById('soundHover');
+        s.volume = 0.2;
         s.currentTime = 0;
-        s.play().catch(e => console.log("Audio waiting for user click"));
+        s.play();
     }
 }
 
 function addToCart(name, price) {
+    // Si no han desbloqueado el audio, lo intentamos desbloquear al primer clic
+    if(!audioUnlocked) audioUnlocked = true;
+    
     cart.push({name, price});
-    playEffect('soundAdd');
+    if(soundEnabled) {
+        let s = document.getElementById('soundAdd');
+        s.currentTime = 0;
+        s.play();
+    }
     renderCart();
 }
 
@@ -299,30 +229,24 @@ function renderCart() {
     let total = 0;
     cart.forEach(item => {
         total += item.price;
-        cartItems.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>Bs.${item.price}</span></div>`;
+        cartItems.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:5px;">
+            <span>${item.name}</span><span>Bs.${item.price}</span></div>`;
     });
     document.getElementById('total').innerText = 'Total: Bs. ' + total;
 }
 
 function checkout() {
-    if(cart.length === 0){
-        alert('Carrito vacío');
-    } else {
-        playEffect('soundCash');
-        setTimeout(() => {
-            let mensaje = "¡Hola! Quisiera comprar estas consolas:%0A%0A";
-            let total = 0;
-            cart.forEach(item => {
-                mensaje += "🕹️ " + item.name + " (Bs. " + item.price + ")%0A";
-                total += item.price;
-            });
-            mensaje += "%0A*Total: Bs. " + total + "*%0A📍 La Paz - Bolivia";
-            let numero = "59162347612"; 
-            window.open("https://wa.me/" + numero + "?text=" + mensaje, "_blank");
-        }, 600);
-    }
+    if(cart.length === 0) return alert('Carrito vacío');
+    
+    if(soundEnabled) document.getElementById('soundCash').play();
+    
+    setTimeout(() => {
+        let mensaje = "¡Pedido desde la Web!%0A%0A";
+        cart.forEach(item => mensaje += "• " + item.name + " (Bs. " + item.price + ")%0A");
+        mensaje += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*";
+        window.open("https://wa.me/59162347612?text=" + mensaje, "_blank");
+    }, 600);
 }
 </script>
-
 </body>
 </html>
