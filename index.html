@@ -35,8 +35,10 @@
         font-size: 28px;
         border-bottom: 2px solid var(--neon-purple);
         box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        letter-spacing: 3px;
     }
 
+    /* Control de Sonido */
     #sound-control {
         position: fixed;
         top: 20px;
@@ -48,8 +50,11 @@
         padding: 10px;
         border-radius: 50%;
         cursor: pointer;
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-shadow: 0 0 15px var(--neon-purple);
     }
 
@@ -68,11 +73,13 @@
         text-align: center;
         border: 1px solid rgba(255,255,255,0.1);
         transition: 0.3s;
+        animation: fadeInUp 0.8s ease backwards;
     }
 
     .card:hover {
         border-color: var(--neon-cyan);
         transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
     }
 
     .card img {
@@ -80,13 +87,17 @@
         height: 180px;
         object-fit: contain;
         margin-bottom: 15px;
+        transition: 0.3s;
     }
+
+    .card:hover img { transform: scale(1.05); }
 
     .price {
         font-size: 24px;
         color: var(--neon-green);
         font-weight: bold;
         margin-bottom: 15px;
+        text-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
     }
 
     .btn-add {
@@ -96,10 +107,15 @@
         border-radius: 10px;
         color: white;
         font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
         cursor: pointer;
         width: 100%;
+        transition: 0.3s;
     }
 
+    .btn-add:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--neon-cyan); }
+
+    /* Carrito */
     #cart {
         position: fixed;
         top: 20px;
@@ -109,152 +125,196 @@
         border-radius: 20px;
         width: 260px;
         border: 1px solid var(--neon-purple);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
     }
+
+    #cart h3 { font-family: 'Orbitron'; color: var(--neon-purple); text-align: center; margin-top: 0; }
+
+    .cart-item {
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        padding-bottom: 4px;
+    }
+
+    #total { font-family: 'Orbitron'; text-align: center; color: var(--neon-cyan); margin: 15px 0; }
 
     .checkout {
         background: var(--neon-green);
         border: none;
-        padding: 12px;
+        padding: 15px;
         width: 100%;
         border-radius: 10px;
         color: white;
         font-weight: bold;
         cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: 0.3s;
     }
 
+    .checkout:hover { filter: brightness(1.1); transform: scale(1.02); }
+
+    /* Footer y Redes */
     footer {
-        padding: 40px;
+        background: rgba(15, 23, 42, 0.9);
+        padding: 40px 20px;
         text-align: center;
+        border-top: 2px solid var(--neon-purple);
+        margin-top: 50px;
         font-family: 'Orbitron', sans-serif;
-        color: var(--neon-cyan);
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .social-btn {
+        text-decoration: none;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 30px;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tiktok:hover { background: #000; border-color: #ff0050; box-shadow: 0 0 15px #ff0050; transform: translateY(-5px); }
+    .facebook:hover { background: #1877f2; border-color: #fff; box-shadow: 0 0 15px #1877f2; transform: translateY(-5px); }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 900px) {
-        .container { margin-right: 0; margin-bottom: 350px; }
+        .container { margin-right: 0; margin-bottom: 380px; }
         #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 20px 20px 0 0; }
     }
 </style>
 </head>
 <body>
 
-<audio id="soundHover" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
-</audio>
-<audio id="soundAdd" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
-</audio>
-<audio id="soundWater" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/701/701-preview.mp3" type="audio/mpeg">
-</audio>
+<audio id="soundHover" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+<audio id="soundAdd" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+<audio id="soundCustom" src="notification_message-notification-22-270130.mp3"></audio>
 
-<button id="sound-control" onclick="unlockAudio()">
+<button id="sound-control" onclick="toggleSound()">
     <i id="sound-icon" class="fas fa-volume-up"></i>
 </button>
 
 <header>🎮 RETROID_GAMES BOLIVIA</header>
 
 <div id="cart">
-    <h3 style="text-align: center; color: var(--neon-purple); font-family: 'Orbitron';">CARRITO</h3>
+    <h3>CARRITO</h3>
     <div id="cart-items"></div>
-    <div id="total" style="text-align: center; margin: 10px 0; font-family: 'Orbitron'; color: var(--neon-cyan);">Total: Bs. 0</div>
+    <div id="total">Total: Bs. 0</div>
     <button class="checkout" onclick="checkout()">
-        <i class="fab fa-whatsapp"></i> PAGAR POR WHATSAPP
+        <i class="fab fa-whatsapp"></i> ENVIAR PEDIDO
     </button>
 </div>
 
 <div class="container">
-    <div class="card" onmouseover="playHover()">
+    <div class="card" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 5.jpg">
-        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">Retroid Pocket 5</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onmouseover="playHover()">
+    <div class="card" onmouseover="playEffect('soundHover')">
         <img src="odin2portal.jpg">
-        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Odin 2 Portal Pro</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onmouseover="playHover()">
+    <div class="card" onmouseover="playEffect('soundHover')">
         <img src="anbernic rg477v.jpg">
-        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">Anbernic RG477V</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
         <div class="price">Bs. 3300</div>
         <button class="btn-add" onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onmouseover="playHover()">
+    <div class="card" onmouseover="playEffect('soundHover')">
         <img src="ayn thor.jpg">
-        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Thor Pro</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
         <div class="price">Bs. 6000</div>
         <button class="btn-add" onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onmouseover="playHover()">
+    <div class="card" onmouseover="playEffect('soundHover')">
         <img src="retroid pocket 6.jpg">
-        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">Retroid Pocket 6</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
         <div class="price">Bs. 4000</div>
         <button class="btn-add" onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
     </div>
 
-    <div class="card" onmouseover="playHover()">
+    <div class="card" onmouseover="playEffect('soundHover')">
         <img src="odin 3.jpg">
-        <h2 style="font-family: 'Orbitron'; font-size: 1rem;">AYN Odin 3 Pro</h2>
+        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
         <div class="price">Bs. 6300</div>
         <button class="btn-add" onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
     </div>
 </div>
 
 <footer>
-    <p>📍 LA PAZ - BOLIVIA</p>
+    <div style="margin-bottom: 20px;">
+        <i class="fas fa-map-marker-alt" style="color: var(--neon-purple);"></i>
+        <span style="color: var(--neon-cyan); letter-spacing: 2px;"> LA PAZ - BOLIVIA</span>
+    </div>
+    
+    <div class="social-links">
+        <a href="https://www.tiktok.com/@retroid_games?_r=1&_t=ZS-95gT81htdsC" target="_blank" class="social-btn tiktok">
+            <i class="fab fa-tiktok"></i> TikTok
+        </a>
+        <a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="social-btn facebook">
+            <i class="fab fa-facebook"></i> Facebook
+        </a>
+    </div>
 </footer>
 
 <script>
 let cart = [];
 let soundEnabled = true;
-let audioUnlocked = false;
 
-function unlockAudio() {
-    audioUnlocked = true;
+function toggleSound() {
     soundEnabled = !soundEnabled;
-    const icon = document.getElementById('sound-icon');
-    icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-    
-    // Desbloqueo inicial
-    document.getElementById('soundHover').play().then(() => {
-        document.getElementById('soundHover').pause();
-    }).catch(e => {});
+    document.getElementById('sound-icon').className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
 }
 
-function playHover() {
-    if(soundEnabled && audioUnlocked) {
-        let s = document.getElementById('soundHover');
-        s.volume = 0.2;
+function playEffect(id) {
+    if(soundEnabled) {
+        const s = document.getElementById(id);
         s.currentTime = 0;
-        s.play().catch(e => {});
+        s.play().catch(() => {});
     }
 }
 
 function addToCart(name, price) {
-    if(!audioUnlocked) audioUnlocked = true;
     cart.push({name, price});
-    if(soundEnabled) {
-        let s = document.getElementById('soundAdd');
-        s.currentTime = 0;
-        s.play().catch(e => {});
-    }
+    playEffect('soundAdd');
     renderCart();
 }
 
 function renderCart() {
-    let cartItems = document.getElementById('cart-items');
-    cartItems.innerHTML = '';
+    const list = document.getElementById('cart-items');
+    list.innerHTML = '';
     let total = 0;
     cart.forEach(item => {
         total += item.price;
-        cartItems.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:5px; border-bottom: 1px solid rgba(255,255,255,0.1)">
-            <span>${item.name}</span><span>Bs.${item.price}</span></div>`;
+        list.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>Bs.${item.price}</span></div>`;
     });
     document.getElementById('total').innerText = 'Total: Bs. ' + total;
 }
@@ -262,18 +322,15 @@ function renderCart() {
 function checkout() {
     if(cart.length === 0) return alert('El carrito está vacío');
     
-    // Reproduce el sonido de la GOTA DE AGUA
-    if(soundEnabled) {
-        let s = document.getElementById('soundWater');
-        s.play().catch(e => {});
-    }
+    // REPRODUCE TU AUDIO PERSONALIZADO
+    playEffect('soundCustom');
     
     setTimeout(() => {
-        let mensaje = "¡Hola RETROID_GAMES! Quisiera comprar:%0A%0A";
-        cart.forEach(item => mensaje += "• " + item.name + " (Bs. " + item.price + ")%0A");
-        mensaje += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) ;
-        window.open("https://wa.me/59162347612?text=" + mensaje, "_blank");
-    }, 500);
+        let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A%0A";
+        cart.forEach(i => text += "• " + i.name + " (Bs. " + i.price + ")%0A");
+        text += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*%0A📍 La Paz - Bolivia";
+        window.open("https://wa.me/59162347612?text=" + text, "_blank");
+    }, 800);
 }
 </script>
 </body>
