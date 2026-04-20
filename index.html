@@ -159,8 +159,6 @@
         transition: 0.3s;
     }
 
-    .checkout:hover { filter: brightness(1.1); transform: scale(1.02); }
-
     /* Footer y Redes */
     footer {
         background: rgba(15, 23, 42, 0.9);
@@ -322,13 +320,14 @@ function renderCart() {
 function checkout() {
     if(cart.length === 0) return alert('El carrito está vacío');
     
-    // REPRODUCE TU AUDIO PERSONALIZADO
     playEffect('soundCustom');
     
     setTimeout(() => {
         let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A%0A";
         cart.forEach(i => text += "• " + i.name + " (Bs. " + i.price + ")%0A");
-        text += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0)";
+        text += "%0A*Total: Bs. " + cart.reduce((a, b) => a + b.price, 0) + "*";
+        
+        // MENSAJE LIMPIO SIN UBICACIÓN
         window.open("https://wa.me/59162347612?text=" + text, "_blank");
     }, 800);
 }
