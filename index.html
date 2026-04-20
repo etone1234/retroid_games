@@ -3,122 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>retroid_games</title>
+<title>RETROID_GAMES BOLIVIA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-body {margin:0;font-family:Arial;background:#0f172a;color:white;}
-header {background:linear-gradient(90deg,#7c3aed,#06b6d4);padding:20px;text-align:center;font-size:28px;font-weight:bold;}
-.container {padding:20px;display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;}
-.card {background:#1e293b;border-radius:15px;padding:15px;box-shadow:0 0 10px rgba(0,0,0,0.5);}
-.card img {width:100%;border-radius:10px;}
-.price {color:#22c55e;font-size:20px;margin:10px 0;}
-button {background:#06b6d4;border:none;padding:10px;border-radius:10px;color:white;cursor:pointer;width:100%;}
-button:hover {background:#0891b2;}
-#cart {position:fixed;top:10px;right:10px;background:#020617;padding:15px;border-radius:10px;width:250px;}
-#cart h3 {margin-top:0;}
-.cart-item {font-size:14px;margin-bottom:5px;}
-.checkout {background:#22c55e;margin-top:10px;}
+    /* Variables de colores Neón */
+    :root {
+        --neon-purple: #7c3aed;
+        --neon-cyan: #06b6d4;
+        --neon-green: #22c55e;
+        --dark-bg: #0f172a;
+    }
+
+    body {
+        margin:0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--dark-bg);
+        color: white;
+        background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+    }
+
+    header {
+        background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+        padding: 30px;
+        text-align: center;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 32px;
+        font-weight: bold;
+        box-shadow: 0 5px 20px rgba(124, 58, 237, 0.5);
+        letter-spacing: 3px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .container {
+        padding: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-right: 300px; /* Espacio para el carrito */
+    }
+
+    .card {
+        background: #1e293b;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 20px var(--neon-cyan);
+    }
+
+    .card img {
+        width: 100%;
+        border-radius: 15px;
+        height: 200px;
+        object-fit: contain;
+        background: #020617;
+        margin-bottom: 15px;
+    }
+
+    .card h2, .card h3, .card h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: var(--neon-cyan);
+    }
+
+    .price {
+        color: var(--neon-green);
+        font-size: 26px;
+        font-weight: bold;
+        margin: 15px 0;
+        text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+    }
+
+    button {
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
+        border: none;
+        padding: 12px;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        filter: brightness(1.2);
+        box-shadow: 0 0 15px var(--neon-purple);
+    }
+
+    /* Estilo del Carrito Lateral */
+    #cart {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(2, 6, 23, 0.9);
+        padding: 25px;
+        border-radius: 20px;
+        width: 260px;
+        border: 2px solid var(--neon-purple);
+        box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    #cart h6 {
+        margin: 0 0 15px 0;
+        font-size: 20px;
+        font-family: 'Orbitron', sans-serif;
+        color: var(--neon-purple);
+        text-align: center;
+        border-bottom: 1px solid #334155;
+        padding-bottom: 10px;
+    }
+
+    .cart-item {
+        font-size: 14px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #total {
+        font-weight: bold;
+        color: var(--neon-cyan);
+        font-family: 'Orbitron', sans-serif;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .checkout {
+        background: var(--neon-green);
+        margin-top: 15px;
+        font-size: 16px;
+    }
+
+    /* Ajuste para móviles */
+    @media (max-width: 800px) {
+        .container { margin-right: 0; margin-bottom: 300px; }
+        #cart { position: relative; width: auto; margin: 20px; top: 0; right: 0; }
+    }
 </style>
 </head>
 
 <body>
 
-<header>🎮 RETROID_GAMES (BOLIVIA)</header>
+<header>🎮 RETROID_GAMES BOLIVIA</header>
 
 <div id="cart">
-  <h6>🛒 Carrito</h6>
-  <div id="cart-items"></div>
-  <div id="total">Total: Bs.0</div>
-  <button class="checkout" onclick="checkout()">Pagar</button>
+    <h6>🛒 MI PEDIDO</h6>
+    <div id="cart-items"></div>
+    <div id="total">Total: Bs. 0</div>
+    <button class="checkout" onclick="checkout()">
+        <i class="fab fa-whatsapp"></i> PAGAR POR WA
+    </button>
 </div>
 
 <div class="container">
+    <div class="card">
+        <img src="retroid pocket 5.jpg">
+        <h2>Retroid Pocket 5</h2>
+        <div class="price">Bs. 3300</div>
+        <button onclick="addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
+    </div>
 
-  <div class="card">
-    <img src="retroid pocket 5.jpg">
-    <h1>Retroid Pocket 5</h1>
-    <div class="price">Bs.3300</div>
-    <button onclick="addToCart('Retroid Pocket 5',3300)">Agregar</button>
-  </div>
+    <div class="card">
+        <img src="odin2portal.jpg">
+        <h2>AYN Odin 2 Portal Pro</h2>
+        <div class="price">Bs. 6000</div>
+        <button onclick="addToCart('AYN Odin 2 Portal Pro', 6000)">+ AGREGAR</button>
+    </div>
 
-  <div class="card">
-    <img src="odin2portal.jpg">
-    <h2>AYN Odin 2 Portal Pro</h2>
-    <div class="price">Bs.6000</div>
-    <button onclick="addToCart('AYN Odin 2 Portal Pro',6000)">Agregar</button>
-  </div>
+    <div class="card">
+        <img src="anbernic rg477v.jpg">
+        <h2>Anbernic RG477V</h2>
+        <div class="price">Bs. 3300</div>
+        <button onclick="addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
+    </div>
 
-  <div class="card">
-    <img src="anbernic rg477v.jpg">
-    <h3>Anbernic RG477V</h3>
-    <div class="price">Bs.3300</div>
-    <button onclick="addToCart('Anbernic RG477V',3300)">Agregar</button>
-  </div>
+    <div class="card">
+        <img src="ayn thor.jpg">
+        <h2>AYN Thor Pro</h2>
+        <div class="price">Bs. 6000</div>
+        <button onclick="addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
+    </div>
 
-  <div class="card">
-    <img src="ayn thor.jpg">
-    <h4>AYN Thor Pro</h4>
-    <div class="price">Bs.6000</div>
-    <button onclick="addToCart('AYN Thor Pro',6000)">Agregar</button>
-  </div>
+    <div class="card">
+        <img src="retroid pocket 6.jpg">
+        <h2>Retroid Pocket 6</h2>
+        <div class="price">Bs. 4000</div>
+        <button onclick="addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
+    </div>
 
-  <div class="card">
-    <img src="retroid pocket 6.jpg">
-    <h5>Retroid Pocket 6</h5>
-    <div class="price">Bs.4000</div>
-    <button onclick="addToCart('retroid pocket 6',4000)">Agregar</button>
-  </div>
-
-  <div class="card">
-    <img src="odin 3.jpg">
-    <h6>AYN Odin 3 Pro</h6>
-    <div class="price">Bs.6300</div>
-    <button onclick="addToCart('AYN Odin 3 Pro',6300)">Agregar</button>
-  </div>
-
-
-
+    <div class="card">
+        <img src="odin 3.jpg">
+        <h2>AYN Odin 3 Pro</h2>
+        <div class="price">Bs. 6300</div>
+        <button onclick="addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
+    </div>
 </div>
 
 <script>
 let cart = [];
 
 function addToCart(name, price) {
-  cart.push({name, price});
-  renderCart();
+    cart.push({name, price});
+    renderCart();
 }
 
 function renderCart() {
-  let cartItems = document.getElementById('cart-items');
-  cartItems.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    total += item.price;
-    cartItems.innerHTML += `<div class="cart-item">${item.name} - Bs. ${item.price}</div>`;
-  });
-
-  document.getElementById('total').innerText = 'Total: $' + total;
-}
-
-function checkout() {
-  if(cart.length === 0){
-    alert('Carrito vacío');
-  } else {
-    let mensaje = "Hola, quiero comprar:%0A";
+    let cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
     let total = 0;
 
     cart.forEach(item => {
-      mensaje += "- " + item.name + " $" + item.price + "%0A";
-      total += item.price;
+        total += item.price;
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <span>Bs. ${item.price}</span>
+            </div>`;
     });
 
-    mensaje += "%0ATotal: $" + total;
+    document.getElementById('total').innerText = 'Total: Bs. ' + total;
+}
 
-    let numero = "59162347612"; // 👈 CAMBIA ESTO POR TU NUMERO
+function checkout() {
+    if(cart.length === 0){
+        alert('Agrega al menos una consola al carrito');
+    } else {
+        let mensaje = "¡Hola! Quisiera comprar estas consolas retro:%0A%0A";
+        let total = 0;
 
-    window.open("https://wa.me/" + 59162347612 + "?text=" + mensaje, "_blank");
-  }
+        cart.forEach(item => {
+            mensaje += "• " + item.name + " (Bs. " + item.price + ")%0A";
+            total += item.price;
+        });
+
+        mensaje += "%0A*Total: Bs. " + total + "*";
+
+        // Tu número de WhatsApp correctamente vinculado
+        let numero = "59162347612"; 
+
+        window.open("https://wa.me/" + numero + "?text=" + mensaje, "_blank");
+    }
 }
 </script>
 
