@@ -6,34 +6,77 @@
 <title>RETROID_GAMES | Store Bolivia</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
     :root {
         --neon-purple: #7c3aed;
         --neon-cyan: #06b6d4;
-        --neon-green: #22c55e;
+        --neon-green: #22c55e; /* Verde Matrix */
         --neon-red: #ef4444;
-        --dark-bg: #020617;
+        --dark-bg: #00050a; /* Fondo ultra oscuro */
     }
 
     body {
         margin: 0;
         font-family: 'Rajdhani', sans-serif;
         background-color: var(--dark-bg);
-        background-image: radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-                          radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
         color: white;
         overflow-x: hidden;
+        position: relative;
+    }
+
+    /* --- ANIMACIÓN DE FONDO ESTILO MATRIX RETRO --- */
+    body::before {
+        content: "10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010 10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        font-family: 'VT323', monospace; /* Fuente pixelada */
+        font-size: 20px;
+        color: var(--neon-green);
+        opacity: 0.15; /* Sutil para no distraer */
+        z-index: -2;
+        white-space: pre-wrap;
+        word-break: break-all;
+        line-height: 1;
+        letter-spacing: 2px;
+        text-shadow: 0 0 5px var(--neon-green);
+        animation: matrixRain 20s linear infinite;
+        pointer-events: none;
+    }
+
+    /* Segunda capa para dar profundidad */
+    body::after {
+        content: "0 10 110 01 010 10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010 10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010 0 10 110 01 010";
+        position: fixed;
+        top: -50%; left: 0; width: 100%; height: 100%;
+        font-family: 'VT323', monospace;
+        font-size: 25px;
+        color: var(--neon-green);
+        opacity: 0.08; /* Más sutil */
+        z-index: -1;
+        white-space: pre-wrap;
+        word-break: break-all;
+        line-height: 1;
+        letter-spacing: 3px;
+        text-shadow: 0 0 8px var(--neon-green);
+        animation: matrixRain 30s linear infinite reverse; /* Mueve en sentido opuesto */
+        pointer-events: none;
+    }
+
+    @keyframes matrixRain {
+        0% { transform: translateY(0%); }
+        100% { transform: translateY(50%); } /* Simula la caída */
     }
 
     header {
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(0, 5, 10, 0.9); /* Más oscuro para Matrix */
         backdrop-filter: blur(10px);
         padding: 25px;
         text-align: center;
-        border-bottom: 2px solid var(--neon-purple);
-        box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
+        border-bottom: 2px solid var(--neon-green); /* Cambiado a verde Matrix */
+        box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -44,7 +87,7 @@
     .header-logo {
         max-height: 100px;
         width: auto;
-        filter: drop-shadow(0 0 10px var(--neon-purple));
+        filter: drop-shadow(0 0 10px var(--neon-green));
     }
 
     .brand-text {
@@ -58,12 +101,14 @@
         font-family: 'Orbitron', sans-serif;
         font-size: 2.8rem;
         font-weight: 700;
-        background: linear-gradient(to right, #ffffff, var(--neon-cyan));
+        /* Degradado verde Matrix */
+        background: linear-gradient(to right, #ffffff, var(--neon-green), #ffffff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
         line-height: 1;
         text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
     }
 
     .container { 
@@ -72,87 +117,72 @@
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
         gap: 30px; 
         margin-right: 320px; 
+        position: relative;
+        z-index: 1; /* Delante del fondo Matrix */
     }
 
     /* --- ESTILOS DE LA TARJETA CON EFECTO GUSANO --- */
     .card { 
-        background: rgba(30, 41, 59, 0.6); 
+        background: rgba(10, 20, 30, 0.85); /* Más oscuro para Matrix */
         border-radius: 20px; 
         text-align: center; 
         border: 1px solid rgba(255,255,255,0.05); 
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
         cursor: pointer;
         position: relative;
-        overflow: hidden; /* Necesario para que el gusano no se salga */
+        overflow: hidden; 
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 25px; /* Padding interno para el contenido */
+        padding: 25px; 
     }
 
-    /* El "Gusano" (línea de luz que corre) */
     .card::before {
         content: '';
         position: absolute;
-        /* Un poco más grande que la tarjeta para que tape el borde real */
         top: -2px; left: -2px; right: -2px; bottom: -2px; 
-        background: var(--neon-cyan);
-        border-radius: 22px; /* Un poco más que la tarjeta para redondear */
-        z-index: -1; /* Detrás del contenido pero delante del pseudo-borde */
-        
-        /* Definimos la forma del gusano usando clip-path */
-        /* Un cuadrado que recorre el borde */
-        clip-path: polygon(
-            0% 0%, 100% 0%, 100% 100%, 0% 100%, /* Borde exterior */
-            0% 3px, 3px 3px, 3px calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 3px, 0% 3px /* Hueco interior */
-        );
-        
-        /* Animación que mueve el gradiente para simular el movimiento */
+        border-radius: 22px; 
+        z-index: -1; 
         background: conic-gradient(
             from 0deg,
             transparent 0%,
             transparent 70%,
-            var(--neon-cyan) 80%,
+            var(--neon-cyan) 80%, /* Mantenemos el gusano cian */
             #fff 90%,
             var(--neon-cyan) 100%
         );
-        
-        opacity: 0; /* Oculto por defecto */
+        opacity: 0; 
         transition: opacity 0.3s;
     }
 
-    /* Capa de fondo interna para tapar el centro del conic-gradient */
     .card::after {
         content: '';
         position: absolute;
         top: 2px; left: 2px; right: 2px; bottom: 2px;
-        background: rgba(20, 30, 48, 0.95); /* Color de fondo sólido para el interior */
+        background: rgba(5, 10, 15, 0.98); /* Fondo interno */
         border-radius: 18px;
         z-index: -1;
     }
 
-    /* Animación del movimiento del gusano */
     @keyframes snakeGlow {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
 
-    /* Estado Hover */
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
-        border-color: transparent; /* Ocultamos el borde real al pasar el mouse */
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.5); /* Brillo cian */
+        border-color: transparent; 
     }
 
     .card:hover::before {
-        opacity: 1; /* Mostramos el gusano */
-        animation: snakeGlow 2s linear infinite; /* Iniciamos el movimiento */
+        opacity: 1; 
+        animation: snakeGlow 1.5s linear infinite; /* Un poco más rápido */
     }
 
-    /* Ajuste del contenido para que no lo pise el gusano */
     .card-content {
         position: relative;
-        z-index: 1; /* Delante de las capas de gusano */
+        z-index: 1; 
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -161,54 +191,69 @@
 
     .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 20px; }
 
-    .price { font-size: 26px; color: var(--neon-green); font-weight: bold; font-family: 'Orbitron'; margin-bottom: 15px; }
+    .price { font-size: 26px; color: var(--neon-green); font-weight: bold; font-family: 'Orbitron'; margin-bottom: 15px; text-shadow: 0 0 5px var(--neon-green); }
     
     .btn-add { 
-        background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); 
-        border: none; padding: 12px; border-radius: 10px; color: white; 
+        /* Degradado verde/cian */
+        background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan)); 
+        border: none; padding: 12px; border-radius: 10px; color: black; /* Texto negro para contraste */
         font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; 
         transition: 0.3s; 
+        text-transform: uppercase;
+    }
+    .btn-add:hover {
+        box-shadow: 0 0 15px var(--neon-green);
+        filter: brightness(1.1);
     }
 
     #cart {
         position: fixed;
         top: 20px; right: 20px;
-        background: rgba(15, 23, 42, 0.98);
+        background: rgba(0, 5, 10, 0.98);
         padding: 20px; border-radius: 20px;
-        width: 280px; border: 1px solid var(--neon-purple);
+        width: 280px; border: 1px solid var(--neon-green);
         z-index: 1000; max-height: 80vh; overflow-y: auto;
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
     }
+
+    #cart h3 { font-family: 'Orbitron'; color: var(--neon-green); text-align: center; text-shadow: 0 0 5px var(--neon-green); }
 
     .cart-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
-        background: rgba(255,255,255,0.05);
+        background: rgba(255,255,255,0.03);
         padding: 10px;
         border-radius: 10px;
+        border-left: 2px solid var(--neon-cyan);
     }
 
-    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; }
+    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; font-size: 1.2rem; }
+    .btn-remove:hover { transform: scale(1.1); }
 
     .modal-content {
-        background: #0f172a; margin: 5% auto; padding: 30px;
-        border: 2px solid var(--neon-cyan); width: 85%; max-width: 500px;
+        background: #00050a; margin: 5% auto; padding: 30px;
+        border: 2px solid var(--neon-green); width: 85%; max-width: 500px;
         border-radius: 25px; text-align: center;
+        box-shadow: 0 0 50px rgba(34, 197, 94, 0.4);
     }
+    .specs-list { text-align: left; color:#e2e8f0; list-style:none; padding:20px; background:rgba(255,255,255,0.03); border-radius:15px; border: 1px solid rgba(34, 197, 94, 0.2); }
+    .specs-list li { margin-bottom: 10px; font-size: 1.1rem; }
 
     footer {
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(0, 5, 10, 0.98);
         padding: 40px 20px;
         text-align: center;
-        border-top: 2px solid var(--neon-purple);
+        border-top: 2px solid var(--neon-green);
         margin-top: 50px;
+        position: relative; z-index: 1;
     }
-    .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-cyan); }
+    .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
 
     @media (max-width: 1000px) {
         .container { margin-right: 0; margin-bottom: 350px; }
-        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 25px 25px 0 0; }
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 25px 25px 0 0; border-top: 2px solid var(--neon-green); }
     }
 </style>
 </head>
@@ -219,14 +264,14 @@
 <audio id="soundTone3" src="tone3.mp3"></audio>
 <audio id="soundTone4" src="tone4.mp3"></audio>
 
-<div id="productModal" class="modal" style="display:none; position:fixed; z-index:3000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.95); backdrop-filter:blur(10px);">
+<div id="productModal" class="modal" style="display:none; position:fixed; z-index:3000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.98); backdrop-filter:blur(10px);">
     <div class="modal-content">
-        <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan);"></h2>
-        <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0;">
-        <ul id="modalSpecs" style="text-align:left; color:#e2e8f0; list-style:none; padding:20px; background:rgba(255,255,255,0.05); border-radius:15px;"></ul>
+        <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-green); text-shadow:0 0 5px var(--neon-green);"></h2>
+        <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">
+        <ul id="modalSpecs" class="specs-list"></ul>
         <div id="modalPrice" class="price"></div>
         <button class="btn-add" id="modalAddBtn">AÑADIR AL CARRITO</button>
-        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px; width:100%;">CERRAR</button>
+        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px; width:100%; font-family:'Orbitron';">CERRAR</button>
     </div>
 </div>
 
@@ -234,15 +279,15 @@
     <img src="logo.jpg" alt="Logo" class="header-logo">
     <div class="brand-text">
         <h1 class="header-title">RETROID GAMES</h1>
-        <span style="color:var(--neon-cyan); letter-spacing:3px;">Retro Consoles Gaming For You</span>
+        <span style="color:var(--neon-green); letter-spacing:3px; text-shadow:0 0 5px var(--neon-green);">Retro Consoles Gaming For You</span>
     </div>
 </header>
 
 <div id="cart">
-    <h3 style="font-family:'Orbitron'; color:var(--neon-purple); text-align:center;">CARRITO</h3>
+    <h3>CARRITO</h3>
     <div id="cart-items"></div>
-    <div id="total" style="font-family:'Orbitron'; text-align:center; margin:15px 0; color:var(--neon-cyan);">Total: Bs. 0</div>
-    <button class="btn-add" style="background:var(--neon-green)" onclick="checkout()">
+    <div id="total" style="font-family:'Orbitron'; text-align:center; margin:15px 0; color:var(--neon-green);">Total: Bs. 0</div>
+    <button class="btn-add" style="background:linear-gradient(45deg, var(--neon-green), #fff); color:black;" onclick="checkout()">
         <i class="fab fa-whatsapp"></i> ENVIAR PEDIDO
     </button>
 </div>
@@ -306,7 +351,7 @@
 <footer>
     <div class="footer-location">La Paz - Bolivia</div>
     <div style="font-family:'Orbitron'; opacity:0.7;">2026</div>
-    <a href="https://www.tiktok.com/@retroid_games" target="_blank" style="color:white; text-decoration:none; border:1px solid var(--neon-purple); padding:10px 20px; border-radius:30px; display:inline-block; margin-top:15px;">
+    <a href="https://www.tiktok.com/@retroid_games" target="_blank" style="color:white; text-decoration:none; border:1px solid var(--neon-green); padding:10px 20px; border-radius:30px; display:inline-block; margin-top:15px; font-family:'Orbitron';">
         <i class="fab fa-tiktok"></i> TikTok @retroid_games
     </a>
 </footer>
@@ -323,7 +368,7 @@ function openSpecs(name, price, img, specs) {
     document.getElementById('modalPrice').innerText = 'Bs. ' + price;
     
     let html = '';
-    specs.forEach(item => html += `<li><i class="fas fa-bolt" style="color:var(--neon-cyan)"></i> ${item}</li>`);
+    specs.forEach(item => html += `<li><i class="fas fa-pixel-circle" style="color:var(--neon-green)"></i> ${item}</li>`);
     document.getElementById('modalSpecs').innerHTML = html;
     
     document.getElementById('modalAddBtn').onclick = () => { addToCart(name, price); closeModal(); };
