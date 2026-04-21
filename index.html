@@ -12,10 +12,10 @@
 <style>
     :root {
         --neon-purple: #7c3aed;
-        --neon-cyan: #06b6d4;
-        --neon-green: #22c55e; /* Verde Matrix */
+        --neon-cyan: #06b6d4; /* Color Cian Original Mantenido */
+        --neon-green: #22c55e;
         --neon-red: #ef4444;
-        --dark-bg: #00050a; /* Fondo ultra oscuro */
+        --dark-bg: #00050a; /* Fondo ultra oscuro para contraste */
     }
 
     body {
@@ -27,67 +27,36 @@
         position: relative;
     }
 
-    /* --- ANIMACIÓN DE FONDO ESTILO MATRIX RETRO --- */
-    body::before {
-        content: "10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010 10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010";
+    /* --- CONTENEDOR PARA LA LLUVIA DIGITAL COMPLETA --- */
+    #matrixCanvas {
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        font-family: 'VT323', monospace; /* Fuente pixelada */
-        font-size: 20px;
-        color: var(--neon-green);
-        opacity: 0.15; /* Sutil para no distraer */
-        z-index: -2;
-        white-space: pre-wrap;
-        word-break: break-all;
-        line-height: 1;
-        letter-spacing: 2px;
-        text-shadow: 0 0 5px var(--neon-green);
-        animation: matrixRain 20s linear infinite;
-        pointer-events: none;
-    }
-
-    /* Segunda capa para dar profundidad */
-    body::after {
-        content: "0 10 110 01 010 10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010 10 1 0101 110 0 101011 0 10 110 01 010 1 110 0 101011 0 10 110 01 010 0 10 110 01 010";
-        position: fixed;
-        top: -50%; left: 0; width: 100%; height: 100%;
-        font-family: 'VT323', monospace;
-        font-size: 25px;
-        color: var(--neon-green);
-        opacity: 0.08; /* Más sutil */
-        z-index: -1;
-        white-space: pre-wrap;
-        word-break: break-all;
-        line-height: 1;
-        letter-spacing: 3px;
-        text-shadow: 0 0 8px var(--neon-green);
-        animation: matrixRain 30s linear infinite reverse; /* Mueve en sentido opuesto */
-        pointer-events: none;
-    }
-
-    @keyframes matrixRain {
-        0% { transform: translateY(0%); }
-        100% { transform: translateY(50%); } /* Simula la caída */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Detrás de todo el contenido */
+        pointer-events: none; /* No interfiere con clics */
     }
 
     header {
-        background: rgba(0, 5, 10, 0.9); /* Más oscuro para Matrix */
+        background: rgba(0, 5, 10, 0.9);
         backdrop-filter: blur(10px);
         padding: 25px;
         text-align: center;
-        border-bottom: 2px solid var(--neon-green); /* Cambiado a verde Matrix */
-        box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+        border-bottom: 2px solid var(--neon-cyan); /* Borde cian */
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 30px;
         min-height: 120px;
+        position: relative; z-index: 10;
     }
 
     .header-logo {
         max-height: 100px;
         width: auto;
-        filter: drop-shadow(0 0 10px var(--neon-green));
+        filter: drop-shadow(0 0 10px var(--neon-cyan));
     }
 
     .brand-text {
@@ -101,14 +70,13 @@
         font-family: 'Orbitron', sans-serif;
         font-size: 2.8rem;
         font-weight: 700;
-        /* Degradado verde Matrix */
-        background: linear-gradient(to right, #ffffff, var(--neon-green), #ffffff);
+        background: linear-gradient(to right, #ffffff, var(--neon-cyan), #ffffff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
         line-height: 1;
         text-transform: uppercase;
-        text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
     }
 
     .container { 
@@ -118,12 +86,12 @@
         gap: 30px; 
         margin-right: 320px; 
         position: relative;
-        z-index: 1; /* Delante del fondo Matrix */
+        z-index: 1; /* Delante del Canvas */
     }
 
-    /* --- ESTILOS DE LA TARJETA CON EFECTO GUSANO --- */
+    /* --- ESTILOS DE LA TARJETA CON EFECTO GUSANO MANTENIDOS --- */
     .card { 
-        background: rgba(10, 20, 30, 0.85); /* Más oscuro para Matrix */
+        background: rgba(10, 20, 30, 0.85);
         border-radius: 20px; 
         text-align: center; 
         border: 1px solid rgba(255,255,255,0.05); 
@@ -147,7 +115,7 @@
             from 0deg,
             transparent 0%,
             transparent 70%,
-            var(--neon-cyan) 80%, /* Mantenemos el gusano cian */
+            var(--neon-cyan) 80%,
             #fff 90%,
             var(--neon-cyan) 100%
         );
@@ -159,7 +127,7 @@
         content: '';
         position: absolute;
         top: 2px; left: 2px; right: 2px; bottom: 2px;
-        background: rgba(5, 10, 15, 0.98); /* Fondo interno */
+        background: rgba(5, 10, 15, 0.98); 
         border-radius: 18px;
         z-index: -1;
     }
@@ -171,13 +139,13 @@
 
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 0 20px rgba(6, 182, 212, 0.5); /* Brillo cian */
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
         border-color: transparent; 
     }
 
     .card:hover::before {
         opacity: 1; 
-        animation: snakeGlow 1.5s linear infinite; /* Un poco más rápido */
+        animation: snakeGlow 1.5s linear infinite;
     }
 
     .card-content {
@@ -194,15 +162,14 @@
     .price { font-size: 26px; color: var(--neon-green); font-weight: bold; font-family: 'Orbitron'; margin-bottom: 15px; text-shadow: 0 0 5px var(--neon-green); }
     
     .btn-add { 
-        /* Degradado verde/cian */
-        background: linear-gradient(45deg, var(--neon-green), var(--neon-cyan)); 
-        border: none; padding: 12px; border-radius: 10px; color: black; /* Texto negro para contraste */
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); 
+        border: none; padding: 12px; border-radius: 10px; color: white;
         font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; 
         transition: 0.3s; 
         text-transform: uppercase;
     }
     .btn-add:hover {
-        box-shadow: 0 0 15px var(--neon-green);
+        box-shadow: 0 0 15px var(--neon-cyan);
         filter: brightness(1.1);
     }
 
@@ -211,12 +178,12 @@
         top: 20px; right: 20px;
         background: rgba(0, 5, 10, 0.98);
         padding: 20px; border-radius: 20px;
-        width: 280px; border: 1px solid var(--neon-green);
+        width: 280px; border: 1px solid var(--neon-cyan);
         z-index: 1000; max-height: 80vh; overflow-y: auto;
-        box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
     }
 
-    #cart h3 { font-family: 'Orbitron'; color: var(--neon-green); text-align: center; text-shadow: 0 0 5px var(--neon-green); }
+    #cart h3 { font-family: 'Orbitron'; color: var(--neon-cyan); text-align: center; text-shadow: 0 0 5px var(--neon-cyan); }
 
     .cart-item {
         display: flex;
@@ -234,30 +201,32 @@
 
     .modal-content {
         background: #00050a; margin: 5% auto; padding: 30px;
-        border: 2px solid var(--neon-green); width: 85%; max-width: 500px;
+        border: 2px solid var(--neon-cyan); width: 85%; max-width: 500px;
         border-radius: 25px; text-align: center;
-        box-shadow: 0 0 50px rgba(34, 197, 94, 0.4);
+        box-shadow: 0 0 50px rgba(6, 182, 212, 0.4);
     }
-    .specs-list { text-align: left; color:#e2e8f0; list-style:none; padding:20px; background:rgba(255,255,255,0.03); border-radius:15px; border: 1px solid rgba(34, 197, 94, 0.2); }
+    .specs-list { text-align: left; color:#e2e8f0; list-style:none; padding:20px; background:rgba(255,255,255,0.03); border-radius:15px; border: 1px solid rgba(6, 182, 212, 0.2); }
     .specs-list li { margin-bottom: 10px; font-size: 1.1rem; }
 
     footer {
         background: rgba(0, 5, 10, 0.98);
         padding: 40px 20px;
         text-align: center;
-        border-top: 2px solid var(--neon-green);
+        border-top: 2px solid var(--neon-cyan);
         margin-top: 50px;
-        position: relative; z-index: 1;
+        position: relative; z-index: 10;
     }
-    .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
+    .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
 
     @media (max-width: 1000px) {
         .container { margin-right: 0; margin-bottom: 350px; }
-        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 25px 25px 0 0; border-top: 2px solid var(--neon-green); }
+        #cart { position: fixed; bottom: 0; top: auto; right: 0; width: 100%; border-radius: 25px 25px 0 0; border-top: 2px solid var(--neon-cyan); }
     }
 </style>
 </head>
 <body>
+
+<canvas id="matrixCanvas"></canvas>
 
 <audio id="soundTone" src="tone.mp3"></audio>
 <audio id="soundTone2" src="tone2.mp3"></audio>
@@ -266,7 +235,7 @@
 
 <div id="productModal" class="modal" style="display:none; position:fixed; z-index:3000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.98); backdrop-filter:blur(10px);">
     <div class="modal-content">
-        <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-green); text-shadow:0 0 5px var(--neon-green);"></h2>
+        <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan); text-shadow:0 0 5px var(--neon-cyan);"></h2>
         <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">
         <ul id="modalSpecs" class="specs-list"></ul>
         <div id="modalPrice" class="price"></div>
@@ -279,15 +248,15 @@
     <img src="logo.jpg" alt="Logo" class="header-logo">
     <div class="brand-text">
         <h1 class="header-title">RETROID GAMES</h1>
-        <span style="color:var(--neon-green); letter-spacing:3px; text-shadow:0 0 5px var(--neon-green);">Retro Consoles Gaming For You</span>
+        <span style="color:var(--neon-cyan); letter-spacing:3px; text-shadow:0 0 5px var(--neon-cyan);">Retro Consoles Gaming For You</span>
     </div>
 </header>
 
 <div id="cart">
     <h3>CARRITO</h3>
     <div id="cart-items"></div>
-    <div id="total" style="font-family:'Orbitron'; text-align:center; margin:15px 0; color:var(--neon-green);">Total: Bs. 0</div>
-    <button class="btn-add" style="background:linear-gradient(45deg, var(--neon-green), #fff); color:black;" onclick="checkout()">
+    <div id="total" style="font-family:'Orbitron'; text-align:center; margin:15px 0; color:var(--neon-cyan);">Total: Bs. 0</div>
+    <button class="btn-add" style="background:linear-gradient(45deg, var(--neon-cyan), #fff); color:black;" onclick="checkout()">
         <i class="fab fa-whatsapp"></i> ENVIAR PEDIDO
     </button>
 </div>
@@ -351,7 +320,7 @@
 <footer>
     <div class="footer-location">La Paz - Bolivia</div>
     <div style="font-family:'Orbitron'; opacity:0.7;">2026</div>
-    <a href="https://www.tiktok.com/@retroid_games" target="_blank" style="color:white; text-decoration:none; border:1px solid var(--neon-green); padding:10px 20px; border-radius:30px; display:inline-block; margin-top:15px; font-family:'Orbitron';">
+    <a href="https://www.tiktok.com/@retroid_games" target="_blank" style="color:white; text-decoration:none; border:1px solid var(--neon-cyan); padding:10px 20px; border-radius:30px; display:inline-block; margin-top:15px; font-family:'Orbitron';">
         <i class="fab fa-tiktok"></i> TikTok @retroid_games
     </a>
 </footer>
@@ -359,6 +328,62 @@
 <script>
 let cart = [];
 
+/* --- SCRIPT PARA LA LLUVIA DIGITAL EN CANVAS --- */
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+
+// Ajustar tamaño del canvas al de la ventana
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // Ajuste inicial
+
+// Caracteres estilo Matrix (números y símbolos pixelados)
+const characters = "0101010101010101010101010101010101010101010101010101010101010101"; 
+const fontSize = 16;
+const columns = Math.floor(canvas.width / fontSize);
+
+// Un array para las posiciones Y de cada columna
+const drops = [];
+for (let i = 0; i < columns; i++) {
+    drops[i] = 1; 
+}
+
+// Dibujar la lluvia
+function drawMatrix() {
+    // Fondo negro translúcido para crear el efecto de estela
+    ctx.fillStyle = "rgba(0, 5, 10, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Color Cian Original Mantenido
+    ctx.fillStyle = "#06b6d4"; 
+    // Fuente pixelada estilo terminal
+    ctx.font = fontSize + "px 'VT323'";
+
+    // Dibujar los caracteres
+    for (let i = 0; i < drops.length; i++) {
+        // Elegir un carácter aleatorio
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        
+        // Dibujar el carácter en la posición X, Y
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Incrementar la posición Y de la gota
+        drops[i]++;
+
+        // Reiniciar la gota si llega al final de la pantalla o aleatoriamente
+        if (drops[i] * fontSize > canvas.width && Math.random() > 0.985) {
+            drops[i] = 1;
+        }
+    }
+}
+
+// Ejecutar la animación
+setInterval(drawMatrix, 50); // Velocidad de la lluvia
+
+/* --- LÓGICA DE LA TIENDA MANTENIDA --- */
 function openSpecs(name, price, img, specs) {
     const s3 = document.getElementById('soundTone3');
     s3.currentTime = 0; s3.play().catch(()=>{});
@@ -368,7 +393,7 @@ function openSpecs(name, price, img, specs) {
     document.getElementById('modalPrice').innerText = 'Bs. ' + price;
     
     let html = '';
-    specs.forEach(item => html += `<li><i class="fas fa-pixel-circle" style="color:var(--neon-green)"></i> ${item}</li>`);
+    specs.forEach(item => html += `<li><i class="fas fa-pixel-circle" style="color:var(--neon-cyan)"></i> ${item}</li>`);
     document.getElementById('modalSpecs').innerHTML = html;
     
     document.getElementById('modalAddBtn').onclick = () => { addToCart(name, price); closeModal(); };
