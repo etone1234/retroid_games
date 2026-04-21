@@ -114,7 +114,7 @@
         border-radius: 10px;
     }
 
-    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; transition: 0.2s; }
+    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; }
 
     .modal {
         display: none; position: fixed; z-index: 3000;
@@ -137,7 +137,7 @@
         margin-top: 50px;
     }
     .footer-location { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--neon-cyan); }
-    .social-btn { text-decoration: none; color: white; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; }
+    .social-btn { text-decoration: none; color: white; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px; margin-top: 15px; }
 
     @media (max-width: 1000px) {
         .container { margin-right: 0; margin-bottom: 350px; }
@@ -145,17 +145,19 @@
     }
 </style>
 </head>
-<body onclick="startMusic()">
+<body>
 
-<audio id="bgMusic" loop><source src="04 Judgment -X- (Stage 1-1).mp3" type="audio/mpeg"></audio>
-<audio id="soundCard" src="animacion.MP3"></audio> <audio id="soundAction" src="animacion.MP3"></audio> <div id="productModal" class="modal">
+<audio id="soundTone" src="tone.mp3"></audio>
+<audio id="soundTone2" src="tone2.mp3"></audio>
+
+<div id="productModal" class="modal">
     <div class="modal-content">
         <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan);"></h2>
         <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0;">
         <ul id="modalSpecs" class="specs-list"></ul>
         <div id="modalPrice" class="price"></div>
         <button class="btn-add" id="modalAddBtn">AÑADIR AL CARRITO</button>
-        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px;">CERRAR</button>
+        <button onclick="closeModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:15px; display:block; width:100%;">CERRAR</button>
     </div>
 </div>
 
@@ -230,18 +232,10 @@
 
 <script>
 let cart = [];
-let musicStarted = false;
-
-function startMusic() {
-    if (!musicStarted) {
-        document.getElementById('bgMusic').volume = 0.2;
-        document.getElementById('bgMusic').play().catch(()=>{});
-        musicStarted = true;
-    }
-}
 
 function openSpecs(name, price, img, specs) {
-    const s = document.getElementById('soundCard');
+    // Sonido tone.mp3 al entrar a la tarjeta
+    const s = document.getElementById('soundTone');
     s.currentTime = 0; s.play().catch(()=>{});
 
     document.getElementById('modalTitle').innerText = name;
@@ -260,8 +254,9 @@ function closeModal() { document.getElementById('productModal').style.display = 
 
 function addToCart(name, price) {
     cart.push({name, price, id: Date.now()});
-    document.getElementById('soundAction').currentTime = 0;
-    document.getElementById('soundAction').play().catch(()=>{});
+    // Sonido tone.mp3 al añadir al carrito
+    const s = document.getElementById('soundTone');
+    s.currentTime = 0; s.play().catch(()=>{});
     renderCart();
 }
 
@@ -291,10 +286,22 @@ function renderCart() {
 }
 
 function checkout() {
-    if(cart.length === 0) return;
-    let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A";
-    cart.forEach(i => text += "• " + i.name + "%0A");
-    window.open("https://wa.me/59162347612?text=" + text, "_blank");
+    if(cart.length === 0) return alert('El carrito está vacío');
+    
+    // Sonido tone2.mp3 al enviar pedido
+    const s2 = document.getElementById('soundTone2');
+    s2.currentTime = 0; s2.play().catch(()=>{});
+
+    setTimeout(() => {
+        let text = "¡Hola RETROID_GAMES! Quisiera comprar:%0A";
+        let total = 0;
+        cart.forEach(i => {
+            text += "• " + i.name + " (Bs. " + i.price + ")%0A";
+            total += i.price;
+        });
+        text += "%0ATotal a pagar: Bs. " + total;
+        window.open("https://wa.me/59162347612?text=" + text, "_blank");
+    }, 500);
 }
 </script>
 </body>
