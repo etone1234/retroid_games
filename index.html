@@ -74,22 +74,89 @@
         margin-right: 320px; 
     }
 
-    /* NUEVA ANIMACIÓN DE LUZ PERIMETRAL */
+    /* --- ESTILOS DE LA TARJETA CON EFECTO GUSANO --- */
     .card { 
         background: rgba(30, 41, 59, 0.6); 
         border-radius: 20px; 
-        padding: 25px; 
         text-align: center; 
-        border: 1px solid rgba(255,255,255,0.1); 
-        transition: all 0.3s ease-in-out; 
+        border: 1px solid rgba(255,255,255,0.05); 
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
         cursor: pointer;
         position: relative;
+        overflow: hidden; /* Necesario para que el gusano no se salga */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px; /* Padding interno para el contenido */
     }
 
+    /* El "Gusano" (línea de luz que corre) */
+    .card::before {
+        content: '';
+        position: absolute;
+        /* Un poco más grande que la tarjeta para que tape el borde real */
+        top: -2px; left: -2px; right: -2px; bottom: -2px; 
+        background: var(--neon-cyan);
+        border-radius: 22px; /* Un poco más que la tarjeta para redondear */
+        z-index: -1; /* Detrás del contenido pero delante del pseudo-borde */
+        
+        /* Definimos la forma del gusano usando clip-path */
+        /* Un cuadrado que recorre el borde */
+        clip-path: polygon(
+            0% 0%, 100% 0%, 100% 100%, 0% 100%, /* Borde exterior */
+            0% 3px, 3px 3px, 3px calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 3px, 0% 3px /* Hueco interior */
+        );
+        
+        /* Animación que mueve el gradiente para simular el movimiento */
+        background: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            transparent 70%,
+            var(--neon-cyan) 80%,
+            #fff 90%,
+            var(--neon-cyan) 100%
+        );
+        
+        opacity: 0; /* Oculto por defecto */
+        transition: opacity 0.3s;
+    }
+
+    /* Capa de fondo interna para tapar el centro del conic-gradient */
+    .card::after {
+        content: '';
+        position: absolute;
+        top: 2px; left: 2px; right: 2px; bottom: 2px;
+        background: rgba(20, 30, 48, 0.95); /* Color de fondo sólido para el interior */
+        border-radius: 18px;
+        z-index: -1;
+    }
+
+    /* Animación del movimiento del gusano */
+    @keyframes snakeGlow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Estado Hover */
     .card:hover {
         transform: translateY(-5px);
-        border-color: var(--neon-cyan);
-        box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), inset 0 0 10px rgba(6, 182, 212, 0.2);
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        border-color: transparent; /* Ocultamos el borde real al pasar el mouse */
+    }
+
+    .card:hover::before {
+        opacity: 1; /* Mostramos el gusano */
+        animation: snakeGlow 2s linear infinite; /* Iniciamos el movimiento */
+    }
+
+    /* Ajuste del contenido para que no lo pise el gusano */
+    .card-content {
+        position: relative;
+        z-index: 1; /* Delante de las capas de gusano */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 20px; }
@@ -182,45 +249,57 @@
 
 <div class="container">
     <div class="card" onclick="openSpecs('Retroid Pocket 5', 3300, 'retroid pocket 5.jpg', ['Procesador: Snapdragon 865', 'Memoria RAM: 8GB LPDDR4x', 'Almacenamiento: 128GB UFS 3.1', 'Pantalla: 5.5p AMOLED 1080p', 'Batería: 5,000 mAh'])">
-        <img src="retroid pocket 5.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
-        <div class="price">Bs. 3300</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
+        <div class="card-content">
+            <img src="retroid pocket 5.jpg">
+            <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 5</h2>
+            <div class="price">Bs. 3300</div>
+            <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 5', 3300)">+ AGREGAR</button>
+        </div>
     </div>
 
     <div class="card" onclick="openSpecs('AYN Odin 2 Portal', 6000, 'odin2portal.jpg', ['Procesador: Snapdragon 8 Gen 2', 'Memoria RAM: 12GB LPDDR5X', 'Almacenamiento: 512GB UFS 4.0', 'Pantalla: 7p OLED 120Hz', 'Batería: 8,000 mAh'])">
-        <img src="odin2portal.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal</h2>
-        <div class="price">Bs. 6000</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal', 6000)">+ AGREGAR</button>
+        <div class="card-content">
+            <img src="odin2portal.jpg">
+            <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 2 Portal</h2>
+            <div class="price">Bs. 6000</div>
+            <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 2 Portal', 6000)">+ AGREGAR</button>
+        </div>
     </div>
 
     <div class="card" onclick="openSpecs('Anbernic RG477V', 3300, 'anbernic rg477v.jpg', ['Procesador: Dimensity 8300', 'Memoria RAM: 8GB LPDDR5X', 'Almacenamiento: 128GB', 'Pantalla: 4.7p 120Hz', 'Batería: 5,500 mAh'])">
-        <img src="anbernic rg477v.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
-        <div class="price">Bs. 3300</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
+        <div class="card-content">
+            <img src="anbernic rg477v.jpg">
+            <h2 style="font-family:'Orbitron'; font-size:1rem;">Anbernic RG477V</h2>
+            <div class="price">Bs. 3300</div>
+            <button class="btn-add" onclick="event.stopPropagation(); addToCart('Anbernic RG477V', 3300)">+ AGREGAR</button>
+        </div>
     </div>
 
     <div class="card" onclick="openSpecs('AYN Thor Pro', 6000, 'ayn thor.jpg', ['Procesador: Snapdragon 8 Gen 2', 'Memoria RAM: 12GB', 'Almacenamiento: 256GB', 'Pantalla: Dual AMOLED', 'Batería: 6,000 mAh'])">
-        <img src="ayn thor.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
-        <div class="price">Bs. 6000</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
+        <div class="card-content">
+            <img src="ayn thor.jpg">
+            <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Thor Pro</h2>
+            <div class="price">Bs. 6000</div>
+            <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Thor Pro', 6000)">+ AGREGAR</button>
+        </div>
     </div>
 
     <div class="card" onclick="openSpecs('Retroid Pocket 6', 4000, 'retroid pocket 6.jpg', ['Procesador: Snapdragon 8 Gen 2', 'Memoria RAM: 8GB LPDDR5x', 'Almacenamiento: 128GB', 'Pantalla: 5.5p AMOLED', 'Batería: 5,000 mAh'])">
-        <img src="retroid pocket 6.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
-        <div class="price">Bs. 4000</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
+        <div class="card-content">
+            <img src="retroid pocket 6.jpg">
+            <h2 style="font-family:'Orbitron'; font-size:1rem;">Retroid Pocket 6</h2>
+            <div class="price">Bs. 4000</div>
+            <button class="btn-add" onclick="event.stopPropagation(); addToCart('Retroid Pocket 6', 4000)">+ AGREGAR</button>
+        </div>
     </div>
 
     <div class="card" onclick="openSpecs('AYN Odin 3 Pro', 6300, 'odin 3.jpg', ['Procesador: Snapdragon 8 Elite', 'Memoria RAM: 12GB LPDDR5X', 'Almacenamiento: 256GB', 'Pantalla: 6p 120Hz', 'Batería: 8,500 mAh'])">
-        <img src="odin 3.jpg">
-        <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
-        <div class="price">Bs. 6300</div>
-        <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
+        <div class="card-content">
+            <img src="odin 3.jpg">
+            <h2 style="font-family:'Orbitron'; font-size:1rem;">AYN Odin 3 Pro</h2>
+            <div class="price">Bs. 6300</div>
+            <button class="btn-add" onclick="event.stopPropagation(); addToCart('AYN Odin 3 Pro', 6300)">+ AGREGAR</button>
+        </div>
     </div>
 </div>
 
