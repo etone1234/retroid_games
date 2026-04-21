@@ -149,8 +149,7 @@
 
 <audio id="soundTone" src="tone.mp3"></audio>
 <audio id="soundTone2" src="tone2.mp3"></audio>
-
-<div id="productModal" class="modal">
+<audio id="soundTone3" src="tone3.mp3"></audio> <div id="productModal" class="modal">
     <div class="modal-content">
         <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan);"></h2>
         <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0;">
@@ -234,9 +233,9 @@
 let cart = [];
 
 function openSpecs(name, price, img, specs) {
-    // Sonido tone.mp3 al entrar a la tarjeta
-    const s = document.getElementById('soundTone');
-    s.currentTime = 0; s.play().catch(()=>{});
+    // Sonido tone3.mp3 al entrar a ver información
+    const s3 = document.getElementById('soundTone3');
+    s3.currentTime = 0; s3.play().catch(()=>{});
 
     document.getElementById('modalTitle').innerText = name;
     document.getElementById('modalImg').src = img;
