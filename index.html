@@ -28,12 +28,9 @@
     /* --- VIDEO DE FONDO --- */
     #bg-video {
         position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
+        right: 0; bottom: 0;
+        min-width: 100%; min-height: 100%;
+        width: auto; height: auto;
         z-index: -100;
         object-fit: cover;
         opacity: 0.5;
@@ -42,7 +39,7 @@
     header {
         background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(10px);
-        padding: 25px;
+        padding: 30px;
         text-align: center;
         border-bottom: 2px solid var(--neon-cyan);
         display: flex;
@@ -55,14 +52,38 @@
 
     .header-logo { max-height: 100px; filter: drop-shadow(0 0 10px var(--neon-cyan)); }
 
+    /* --- ANIMACIÓN TÍTULO Y SUBTÍTULO --- */
     .header-title {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.8rem;
+        font-size: 3rem;
         font-weight: 700;
-        background: linear-gradient(to right, #ffffff, var(--neon-cyan));
+        margin: 0;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        background: linear-gradient(90deg, #fff, var(--neon-cyan), #fff);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin: 0;
+        animation: shineText 3s linear infinite;
+    }
+
+    .header-subtitle {
+        color: var(--neon-cyan);
+        letter-spacing: 4px;
+        display: block;
+        font-weight: bold;
+        text-transform: uppercase;
+        animation: pulseFade 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes shineText {
+        to { background-position: 200% center; }
+    }
+
+    @keyframes pulseFade {
+        from { opacity: 0.6; text-shadow: 0 0 5px var(--neon-cyan); }
+        to { opacity: 1; text-shadow: 0 0 15px var(--neon-cyan), 0 0 20px #fff; }
     }
 
     .container { 
@@ -116,10 +137,38 @@
 
     .price { font-size: 26px; color: var(--neon-green); font-weight: bold; font-family: 'Orbitron'; margin-bottom: 15px; }
     
+    /* --- ANIMACIÓN BOTÓN AGREGAR --- */
     .btn-add { 
-        background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); 
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan), var(--neon-purple)); 
+        background-size: 200% auto;
         border: none; padding: 12px; border-radius: 10px; color: white; 
-        font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%; 
+        font-family: 'Orbitron'; font-weight: bold; cursor: pointer; width: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: 0.4s;
+        text-transform: uppercase;
+    }
+
+    .btn-add:hover {
+        background-position: right center;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px var(--neon-cyan);
+    }
+
+    /* Brillo que cruza el botón */
+    .btn-add::after {
+        content: '';
+        position: absolute;
+        top: -50%; left: -60%;
+        width: 20%; height: 200%;
+        background: rgba(255, 255, 255, 0.4);
+        transform: rotate(30deg);
+        transition: 0s;
+    }
+
+    .btn-add:hover::after {
+        left: 120%;
+        transition: 0.6s;
     }
 
     #cart {
@@ -169,7 +218,7 @@
     <img src="logo.jpg" class="header-logo">
     <div class="brand-text">
         <h1 class="header-title">RETROID GAMES</h1>
-        <span style="color:var(--neon-cyan); letter-spacing:3px;">Retro Consoles Gaming For You</span>
+        <span class="header-subtitle">Retro Consoles Gaming For You</span>
     </div>
 </header>
 
@@ -293,7 +342,6 @@ function renderCart() {
 
 function checkout() {
     if(cart.length === 0) return alert('El carrito está vacío');
-    // CAMBIO: Ahora usa soundTone5 para el envío de WhatsApp
     const s5 = document.getElementById('soundTone5');
     s5.currentTime = 0; s5.play().catch(()=>{});
     setTimeout(() => {
