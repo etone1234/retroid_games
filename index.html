@@ -114,7 +114,8 @@
         border-radius: 10px;
     }
 
-    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; }
+    .btn-remove { background: none; border: none; color: var(--neon-red); cursor: pointer; transition: 0.2s; }
+    .btn-remove:hover { transform: scale(1.2); }
 
     .modal {
         display: none; position: fixed; z-index: 3000;
@@ -149,7 +150,8 @@
 
 <audio id="soundTone" src="tone.mp3"></audio>
 <audio id="soundTone2" src="tone2.mp3"></audio>
-<audio id="soundTone3" src="tone3.mp3"></audio> <div id="productModal" class="modal">
+<audio id="soundTone3" src="tone3.mp3"></audio>
+<audio id="soundTone4" src="tone4.mp3"></audio> <div id="productModal" class="modal">
     <div class="modal-content">
         <h2 id="modalTitle" style="font-family:'Orbitron'; color:var(--neon-cyan);"></h2>
         <img id="modalImg" style="width:100%; max-height:200px; object-fit:contain; margin: 20px 0;">
@@ -233,7 +235,6 @@
 let cart = [];
 
 function openSpecs(name, price, img, specs) {
-    // Sonido tone3.mp3 al entrar a ver información
     const s3 = document.getElementById('soundTone3');
     s3.currentTime = 0; s3.play().catch(()=>{});
 
@@ -253,7 +254,6 @@ function closeModal() { document.getElementById('productModal').style.display = 
 
 function addToCart(name, price) {
     cart.push({name, price, id: Date.now()});
-    // Sonido tone.mp3 al añadir al carrito
     const s = document.getElementById('soundTone');
     s.currentTime = 0; s.play().catch(()=>{});
     renderCart();
@@ -261,6 +261,9 @@ function addToCart(name, price) {
 
 function removeFromCart(id) {
     cart = cart.filter(i => i.id !== id);
+    // NUEVO: Sonido tone4.mp3 al eliminar elemento
+    const s4 = document.getElementById('soundTone4');
+    s4.currentTime = 0; s4.play().catch(()=>{});
     renderCart();
 }
 
@@ -287,7 +290,6 @@ function renderCart() {
 function checkout() {
     if(cart.length === 0) return alert('El carrito está vacío');
     
-    // Sonido tone2.mp3 al enviar pedido
     const s2 = document.getElementById('soundTone2');
     s2.currentTime = 0; s2.play().catch(()=>{});
 
